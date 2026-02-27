@@ -1,0 +1,15 @@
+<div *transloco="let t" class="capsule-legend-container">
+  <h2>{{ t('capsule.legend.title') }}</h2>
+  <p>{{ t('capsule.legend.subtitle') }}</p>
+  
+  <div class="legend-section" *ngFor="let section of statusSections; let last = last">
+    <h3 class="section-title">{{ t(section.titleKey) }}</h3>
+    <div class="icon-row">
+      <div class="legend-item" *ngFor="let item of section.items">
+        <mat-icon [color]="item.color">{{ item.icon }}</mat-icon>
+        <span class="legend-label">{{ t(item.labelKey) }}</span>
+      </div>
+    </div>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </div>
+</div>

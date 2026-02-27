@@ -1,0 +1,197 @@
+{
+  "atranslation-hint": "Cette page n'est disponible qu'en anglais. Utilisez la fonction de traduction de votre navigateur pour d'autres langues.",
+  "capsule_items": {
+    "grid_view": "TRANSLATE ME",
+    "list_view": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "select_capsule": "TRANSLATE ME",
+    "upload": "TRANSLATE ME"
+  },
+  "capsules": {
+    "basic_info": "TRANSLATE ME",
+    "capsule": {
+      "items": "TRANSLATE ME",
+      "name": "TRANSLATE ME",
+      "no_description": "TRANSLATE ME",
+      "opens": "TRANSLATE ME",
+      "status": {
+        "status": "TRANSLATE ME"
+      }
+    },
+    "description": "TRANSLATE ME",
+    "description_placeholder": "TRANSLATE ME",
+    "is_physical": "TRANSLATE ME",
+    "is_physical_description": "TRANSLATE ME",
+    "is_public": "TRANSLATE ME",
+    "is_public_description": "TRANSLATE ME",
+    "latitude": "TRANSLATE ME",
+    "legend": {
+      "help": "TRANSLATE ME",
+      "subtitle": "TRANSLATE ME",
+      "title": "TRANSLATE ME"
+    },
+    "location": "TRANSLATE ME",
+    "longitude": "TRANSLATE ME",
+    "map_coming_soon": "TRANSLATE ME",
+    "name": "TRANSLATE ME",
+    "name_placeholder": "TRANSLATE ME",
+    "open_date": "TRANSLATE ME",
+    "options": "TRANSLATE ME",
+    "panels": {
+      "capsules": {
+        "empty": "TRANSLATE ME",
+        "new": "TRANSLATE ME",
+        "title": "TRANSLATE ME"
+      },
+      "contents": {
+        "title": "TRANSLATE ME"
+      },
+      "library": {
+        "title": "TRANSLATE ME"
+      },
+      "recipients": {
+        "title": "TRANSLATE ME"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "cancel": "TRANSLATE ME",
+      "create": "TRANSLATE ME",
+      "update": "TRANSLATE ME"
+    },
+    "delete": "TRANSLATE ME",
+    "validation": {
+      "max_length": "TRANSLATE ME",
+      "required": "TRANSLATE ME"
+    },
+    "view": "TRANSLATE ME"
+  },
+  "dashboard": {
+    "charts": {
+      "select_metric": "TRANSLATE ME",
+      "select_type": "TRANSLATE ME"
+    },
+    "common": {
+      "loading": "TRANSLATE ME"
+    },
+    "global": {
+      "registeredUsers": "TRANSLATE ME",
+      "statistics": "TRANSLATE ME"
+    },
+    "user": {
+      "statistics": "TRANSLATE ME"
+    }
+  },
+  "emailVerification": {
+    "accountVerified": "Votre compte a été vérifié avec succès. Vous pouvez maintenant vous connecter à Gift Moment.",
+    "backToLogin": "Retour à la connexion",
+    "checkEmail": "Vérifiez votre email",
+    "checkSpam": "Si vous ne voyez pas l'email, veuillez vérifier votre dossier spam.",
+    "linkExpired": "Le lien de vérification a expiré. Veuillez en demander un nouveau.",
+    "proceedToLogin": "Procéder à la connexion",
+    "resendVerification": "Renvoyer l'email de vérification",
+    "verificationFailed": "Échec de la vérification",
+    "verificationSent": "Nous avons envoyé un lien de vérification à votre adresse email. Veuillez cliquer sur ce lien pour vérifier votre compte.",
+    "verificationSuccess": "Email vérifié !",
+    "verifying": "Vérification de votre adresse email..."
+  },
+  "forgotPassword": {
+    "backToLogin": "Retour à la connexion",
+    "cancel": "Annuler",
+    "checkEmail": "Vérifiez votre adresse e-mail",
+    "emailInvalid": "Veuillez saisir une adresse e-mail valide",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Saisissez votre adresse e-mail",
+    "emailRequired": "L'adresse e-mail est obligatoire",
+    "enterEmail": "Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "resetLinkSent": "Nous vous avons envoyé un lien de réinitialisation de mot de passe. Veuillez consulter votre boîte de réception et suivre les instructions.",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "sending": "Envoi en cours..."
+  },
+  "library": {
+    "common": {
+      "tooltips": {
+        "delete": "TRANSLATE ME",
+        "view": "TRANSLATE ME"
+      }
+    },
+    "empty": "TRANSLATE ME",
+    "filters": {
+      "all": "TRANSLATE ME"
+    },
+    "loading": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "search": "TRANSLATE ME",
+    "title": "TRANSLATE ME",
+    "unnamed_item": "TRANSLATE ME",
+    "upload": "TRANSLATE ME",
+    "upload_files": "TRANSLATE ME"
+  },
+  "login": {
+    "Welcome": "Bienmencer à Gift Moment",
+    "emailError": "Votre adresse e-mail n'est pas valide",
+    "emailInput": "Votre adresse e-mail ici",
+    "emailLabel": "E-mail",
+    "forgotPwdButton": "Votre mot de passe oublié?",
+    "googleButton": "Connectez-vous avec Google",
+    "loginButton": "Se connecter",
+    "passwordError": "Votre mot de passe n'est pas valide",
+    "passwordInput": "Votre mot de passe ici",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "TRANSLATE ME",
+    "passwordRequired": "TRANSLATE ME",
+    "registerButton": "signer"
+  },
+  "recipients": {
+    "add": "TRANSLATE ME",
+    "empty": "TRANSLATE ME",
+    "title": "TRANSLATE ME"
+  },
+  "register": {
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "createAccount": "Créer un compte",
+    "emailInvalid": "Veuillez entrer un email valide",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Entrez votre email",
+    "emailRequired": "L'email est requis",
+    "fullNameInvalid": "TRANSLATE ME",
+    "fullNameLabel": "Nom",
+    "fullNamePlaceholder": "Insérez votre nom complet",
+    "fullNameRequired": "Le nom est obligatoire",
+    "loginLink": "Se connecter",
+    "passwordLabel": "Mot de passe",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordPlaceholder": "Créez un mot de passe",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "registerButton": "Créer un compte",
+    "termsCheckbox": "J'accepte les",
+    "termsLink": "Conditions d'utilisation",
+    "termsRequired": "Vous devez accepter les conditions pour vous inscrire"
+  },
+  "resetPassword": {
+    "backToLogin": "Retour à la connexion",
+    "canNowLogin": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer votre nouveau mot de passe",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "enterNewPassword": "Veuillez saisir votre nouveau mot de passe ci-dessous.",
+    "newPassword": "Nouveau mot de passe",
+    "passwordMinLength": "Le mot de passe doit comporter au moins 8 caractères",
+    "passwordPlaceholder": "Saisir un nouveau mot de passe",
+    "passwordRequired": "Mot de passe requis",
+    "passwordResetSuccess": "Réinitialisation du mot de passe réussie",
+    "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "requestNewLink": "Demander un nouveau lien",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "resetYourPassword": "Réinitialiser votre mot de passe",
+    "resetting": "Réinitialisation...",
+    "tokenInvalid": "Le lien de réinitialisation du mot de passe est invalide ou a expiré"
+  },
+  "unnamed_item": "TRANSLATE ME"
+}

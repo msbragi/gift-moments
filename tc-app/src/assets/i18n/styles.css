@@ -1,0 +1,116 @@
+@import url('./pages/common-style.css');
+@import url('./pages/home/home-style.css');
+@import url('./footer/footer-style.css');
+
+/* Under Construction Page Styles */
+.under-construction {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.under-construction .page-header {
+    margin-bottom: 3rem;
+}
+
+.under-construction .page-header .construction-icon {
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.under-construction .page-header h1 {
+    color: var(--mat-sys-primary);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.under-construction .page-header .page-subtitle {
+    font-size: 1.2rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.under-construction .construction-message h2 {
+    color: var(--mat-sys-on-surface);
+    margin-bottom: 1rem;
+}
+
+.under-construction .construction-message p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: 2rem;
+}
+
+.under-construction .construction-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.under-construction .construction-features .feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--mat-sys-surface-container-lowest);
+    border-radius: 8px;
+}
+
+.under-construction .construction-features .feature-item .material-icons {
+    color: var(--mat-sys-primary);
+}
+
+@media (min-width: 768px) {
+    .under-construction .construction-features {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+.under-construction .cta-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--mat-sys-surface-container);
+    border-radius: 12px;
+}
+
+.under-construction .cta-section h3 {
+    color: var(--mat-sys-on-surface);
+    margin-bottom: 1rem;
+}
+
+.under-construction .cta-section p {
+    margin-bottom: 1.5rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.under-construction .cta-section .cta-button {
+    background: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--mat-elevation-shadow-2);
+}
+
+.under-construction .cta-section .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--mat-elevation-shadow-3);
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}

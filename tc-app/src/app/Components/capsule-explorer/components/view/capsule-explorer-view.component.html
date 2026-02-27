@@ -1,0 +1,68 @@
+<div *transloco="let t" class="capsule-view">
+  <div class="view-header">
+    <button mat-icon-button (click)="onBackClick()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ t('explorer.view.title') }}</h2>
+  </div>
+
+  <mat-card *ngIf="capsule" class="capsule-detail-card" appearance="outlined">
+    <mat-card-header>
+      <div class="capsule-info">
+        <mat-card-title>{{ capsule.name }}</mat-card-title>
+        <mat-card-subtitle *ngIf="capsule.description">{{ capsule.description }}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="!capsule.description">{{ t('capsule.no_description') }}</mat-card-subtitle>
+      </div>
+      <div class="status-icons">
+        <mat-icon *ngIf="!capsule.isPublic" title="Private Capsule">lock</mat-icon>
+        <mat-icon *ngIf="capsule.isPublic" title="Public Capsule">public</mat-icon>
+        <mat-icon *ngIf="capsule.isOpen" title="Opened">visibility</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && isDateInPast(capsule.openDate)" title="Ready to Open">lock_open</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && !isDateInPast(capsule.openDate)" title="Scheduled">lock_clock</mat-icon>
+        <mat-icon *ngIf="!capsule.isPhysical" title="Digital Capsule">cloud</mat-icon>
+        <mat-icon *ngIf="capsule.isPhysical" title="Physical Capsule">place</mat-icon>
+      </div>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <!-- Basic Information Bar -->
+      <div class="info-bar">
+        <div class="info-item" *ngIf="capsule.created">
+          <mat-icon>calendar_today</mat-icon>
+          <span>{{ t('explorer.view.created') }}: {{ formatDate(capsule.created) }}</span>
+        </div>
+        <div class="info-item" *ngIf="capsule.openDate">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ t('explorer.view.open_date') }}: {{ formatDate(capsule.openDate) }}</span>
+        </div>
+        <div class="info-item" *ngIf="capsule.user?.fullName">
+          <mat-icon>person</mat-icon>
+          <span>{{ t('explorer.view.created_by') }}: {{ capsule.user?.fullName }}</span>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Physical Capsule - Map View -->
+        <tc-capsule-explorer-map 
+          *ngIf="capsule.isPhysical"
+          [lat]="capsule.lat"
+          [lng]="capsule.lng"
+          [capsule]="capsule">
+        </tc-capsule-explorer-map>
+
+        <!-- Digital Capsule - Items Grid -->
+        <tc-capsule-explorer-items 
+          *ngIf="!capsule.isPhysical"
+          [items]="capsule.items || []"
+          [capsule]="capsule">
+        </tc-capsule-explorer-items>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="!capsule" class="no-capsule">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ t('explorer.view.no_capsule') }}</p>
+  </div>
+</div>

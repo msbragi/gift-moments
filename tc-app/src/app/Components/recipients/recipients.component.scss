@@ -1,0 +1,29 @@
+.recipients-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.recipients-content {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+}
+
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-color-secondary);
+}

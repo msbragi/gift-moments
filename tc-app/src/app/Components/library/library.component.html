@@ -1,0 +1,44 @@
+<div *transloco="let t" class="library-container">
+
+    <!-- Header with actions -->
+    <div class="items-header">
+        <div class="header-title">
+            <h2>{{ t('library.component.title') }}</h2>
+        </div>
+        <div class="header-actions">
+            <tc-panel-view-toggle [options]="viewToggleConfig" 
+                [value]="viewToggleMode"
+                (valueChange)="onViewModeChange($event)">
+            </tc-panel-view-toggle>
+            <tc-content-filter (filterChange)="onFilterChange($event)">
+            </tc-content-filter>
+        </div>
+    </div>
+
+    <div class="upload-panel" *ngIf="viewToggleMode === 'upload'">
+        <tc-drop-upload (fileRemoved)="onFileRemoved()" (fileSelected)="onFileSelected($event)"
+            (uploadRequested)="onFileUpload($event)">
+        </tc-drop-upload>
+    </div>
+
+    <!-- Items content -->
+    <div class="items-content">
+        <ng-container *ngIf="items$ | async as items">
+            <div *ngIf="items.length === 0" class="empty-state">
+                <mat-icon>folder_open</mat-icon>
+                <p>{{ t('capsule_items.no_items') }}</p>
+            </div>
+
+            <!-- Grid view -->
+            <tc-capsule-library-card *ngIf="viewToggleMode === 'grid' && items.length > 0" [items]="items"
+                [showAddToCapsule]="false" (itemView)="onItemView($event)" (itemDelete)="onItemDelete($event)">
+            </tc-capsule-library-card>
+
+            <!-- Table view -->
+            <tc-capsule-library-table *ngIf="viewToggleMode === 'list' && items.length > 0" [items]="items"
+                [showAddToCapsule]="false" (itemView)="onItemView($event)" (itemDelete)="onItemDelete($event)">
+            </tc-capsule-library-table>
+        </ng-container>
+    </div>
+
+</div>

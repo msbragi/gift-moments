@@ -1,0 +1,62 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: var(--mat-sys-level4, 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12), 0px 3px 5px -1px rgba(0, 0, 0, 0.2));
+}
+
+.register-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.terms-container {
+  margin: 1.5rem 0;
+}
+
+.terms-error {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.button-container {
+  margin: 1.5rem 0;
+}
+
+.spinner-in-button {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.login-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

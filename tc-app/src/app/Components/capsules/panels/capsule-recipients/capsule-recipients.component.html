@@ -1,0 +1,168 @@
+<div *transloco="let t; read: 'recipients'" class="recipients">
+  <div class="recipients__header">
+    <div class="recipients__header-left">
+      <tc-panel-view-toggle
+        [options]="viewToggleConfig"
+        [value]="viewToggleMode"
+        (valueChange)="viewToggleMode = $event">
+      </tc-panel-view-toggle>
+    </div>
+    <div class="recipients__actions">
+      <button mat-icon-button
+              color="primary"
+              [matTooltip]="t('add')"
+              [disabled]="!currentCapsule"
+              (click)="addNewRecipient()"
+              ariaLabel="{{ t('add') }}">
+        <mat-icon>person_add</mat-icon>
+      </button>
+
+      <mat-divider vertical></mat-divider>
+
+      <button mat-icon-button
+              color="accent"
+              [matTooltip]="t('sendNotifications')"
+              [disabled]="!(recipients$ | async)?.length || !currentCapsule"
+              (click)="sendNotificationsToAll()"
+              ariaLabel="{{ t('sendNotifications') }}">
+        <mat-icon>notifications_active</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="recipients__content">
+    @if (recipients$ | async; as recipients) {
+
+      @if (!recipients.length) {
+        <div class="recipients__empty">
+          <p>{{ t('empty') }}</p>
+        </div>
+      }
+
+      <!-- GRID / CHIPS VIEW -->
+      @if (recipients.length && viewToggleMode === 'grid') {
+        <mat-chip-set class="recipients-chip-set" role="list">
+          @for (recipient of recipients; track recipient.id) {
+            <mat-chip class="recipient-chip"
+                      role="listitem"
+                      [removable]="true"
+                      (click)="editRecipient(recipient)">
+              <span class="recipient-chip__main">
+                <mat-icon class="recipient-chip__status"
+                          [color]="recipient.notified ? 'accent' : undefined">
+                  {{ recipient.notified ? 'notifications_active' : 'notifications_none' }}
+                </mat-icon>
+
+                <span class="recipient-chip__text">
+                  <span class="recipient-chip__label">
+                    {{ recipient.fullName || recipient.email }}
+                  </span>
+                  @if (recipient.fullName) {
+                    <span class="recipient-chip__sub">
+                      {{ recipient.email }}
+                    </span>
+                  }
+                </span>
+
+                <span class="recipient-chip__spacer"></span>
+
+                <span class="recipient-chip__actions"
+                      (click)="$event.stopPropagation()">
+
+                  <button mat-icon-button
+                          class="recipient-chip__btn"
+                          [disabled]="recipient.notified"
+                          [matTooltip]="recipient.notified ? t('alreadyNotified') : t('sendNotification')"
+                          ariaLabel="{{ recipient.notified ? t('alreadyNotified') : t('sendNotification') }}"
+                          (click)="sendNotificationToRecipient(recipient)">
+                    <mat-icon>notifications</mat-icon>
+                  </button>
+
+                  <button mat-icon-button
+                          class="recipient-chip__btn"
+                          [matTooltip]="t('delete')"
+                          ariaLabel="{{ t('delete') }}"
+                          (click)="removeRecipient(recipient)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </span>
+              </span>
+            </mat-chip>
+          }
+        </mat-chip-set>
+      }
+
+      <!-- TABLE VIEW -->
+      @if (recipients.length && viewToggleMode === 'list') {
+        <div class="recipients-table">
+          <table mat-table [dataSource]="recipients" class="mat-elevation-z1">
+            <!-- Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>{{ t('email') }}</th>
+              <td mat-cell *matCellDef="let r">{{ r.email }}</td>
+            </ng-container>
+
+            <!-- Full Name -->
+            <ng-container matColumnDef="fullName">
+              <th mat-header-cell *matHeaderCellDef>{{ t('fullName') }}</th>
+              <td mat-cell *matCellDef="let r">{{ r.fullName || '-' }}</td>
+            </ng-container>
+
+            <!-- Has Opened -->
+            <ng-container matColumnDef="hasOpened">
+              <th mat-header-cell *matHeaderCellDef>{{ t('hasOpened') }}</th>
+              <td mat-cell *matCellDef="let r">
+                <mat-icon *ngIf="r.hasOpened" color="accent">check_circle</mat-icon>
+                <mat-icon *ngIf="!r.hasOpened">cancel</mat-icon>
+              </td>
+            </ng-container>
+
+            <!-- Notified -->
+            <ng-container matColumnDef="notified">
+              <th mat-header-cell *matHeaderCellDef>{{ t('hasNotified') }}</th>
+              <td mat-cell *matCellDef="let r">
+                <mat-icon *ngIf="r.notified" color="accent">check_circle</mat-icon>
+                <mat-icon *ngIf="!r.notified">cancel</mat-icon>
+              </td>
+            </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>{{ t('actions') }}</th>
+              <td mat-cell *matCellDef="let r" class="actions-column">
+                <button mat-icon-button
+                        color="primary"
+                        [matTooltip]="t('edit')"
+                        ariaLabel="{{ t('edit') }}"
+                        (click)="editRecipient(r)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button
+                        color="accent"
+                        [disabled]="r.notified"
+                        [matTooltip]="r.notified ? t('alreadyNotified') : t('sendNotification')"
+                        ariaLabel="{{ r.notified ? t('alreadyNotified') : t('sendNotification') }}"
+                        (click)="sendNotificationToRecipient(r)">
+                  <mat-icon>notifications</mat-icon>
+                </button>
+
+                <button mat-icon-button
+                        color="warn"
+                        class="delete-button"
+                        [matTooltip]="t('delete')"
+                        ariaLabel="{{ t('delete') }}"
+                        (click)="removeRecipient(r)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      }
+    }
+  </div>
+</div>

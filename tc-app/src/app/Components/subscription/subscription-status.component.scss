@@ -1,0 +1,158 @@
+.subscription-status {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+// Horizontal scroll for capsules
+.capsules-scroll-wrapper {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 8px 0 16px 0;
+  scroll-behavior: smooth;
+}
+
+.capsule-card.horizontal {
+  flex: 0 0 350px;
+  min-width: 350px;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.capsule-card.needs-attention {
+  border-left: 4px solid var(--mat-sys-error);
+}
+
+// Storage header layout
+.total-storage-header {
+  margin-bottom: 18px;
+  border-left: 4px solid var(--mat-sys-primary);
+}
+
+mat-card-header.storage-header  {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.storage-metrics {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.storage-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  
+  mat-chip {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .metric-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    strong {
+      font-size: 0.9rem;
+    }
+    
+    small {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      line-height: 1.2;
+    }
+  }
+}
+
+.capsule-card.horizontal mat-chip {
+	width: 100% !important;
+}
+
+// Chip-based content styling
+.plan-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  
+  .date-chip {
+    width: fit-content;
+  }
+}
+
+.usage-overview {
+  margin-bottom: 16px;
+  
+  h4 {
+    margin: 0 0 8px 0;
+  }
+  
+  .usage-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+    
+    .usage-chip {
+      width: fit-content;
+    }
+  }
+}
+
+.features-section {
+  h4 {
+    margin: 0 0 8px 0;
+  }
+  
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    .feature-chip {
+      width: fit-content;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .subscription-status {
+    padding: 8px;
+  }
+  
+  .capsule-card.horizontal {
+    flex: 0 0 280px;
+    min-width: 280px;
+  }
+  
+  .storage-metrics {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .storage-metric {
+    mat-chip {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .capsule-card.horizontal {
+    flex: 0 0 250px;
+    min-width: 250px;
+  }
+}

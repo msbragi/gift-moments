@@ -1,0 +1,72 @@
+<div *transloco="let t; read: 'content'" class="content-viewer-container">
+  <mat-toolbar color="primary">
+    <span>{{ item.name }}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <div class="content-container">
+    <!-- Image viewer -->
+    <div *ngIf="contentType === 'image'" class="image-viewer">
+      <img *ngIf="contentUrl" [src]="contentUrl" [alt]="item.name">
+      <div *ngIf="!contentUrl" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+    
+    <!-- Video viewer -->
+    <div *ngIf="contentType === 'video'" class="video-viewer">
+      <video *ngIf="contentUrl" controls>
+        <source [src]="contentUrl" [type]="item.contentType">
+        {{ t('browser.notsupported') }}
+      </video>
+      <div *ngIf="!contentUrl" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+    
+    <!-- Audio viewer -->
+    <div *ngIf="contentType === 'audio'" class="audio-viewer">
+      <audio *ngIf="contentUrl" controls>
+        <source [src]="contentUrl" [type]="item.contentType">
+        {{ t('browser.notsupported') }}
+      </audio>
+      <div *ngIf="!contentUrl" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+    
+    <!-- PDF viewer -->
+    <div *ngIf="contentType === 'pdf'" class="pdf-viewer">
+      <iframe *ngIf="contentUrl" [src]="contentUrl" width="100%" height="100%"></iframe>
+      <div *ngIf="!contentUrl" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+    
+    <!-- Text viewer -->
+    <div *ngIf="contentType === 'text'" class="text-viewer">
+      <pre *ngIf="textContent">{{ textContent }}</pre>
+      <div *ngIf="!textContent" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+    
+    <!-- Default fallback -->
+    <div *ngIf="contentType === 'other'" class="fallback-viewer">
+      <div *ngIf="contentUrl" class="fallback-message">
+        <mat-icon>insert_drive_file</mat-icon>
+        <p>{{ t('download.prompt') }}</p>
+        <a mat-raised-button color="primary" [href]="contentUrl" download>
+          <mat-icon>download</mat-icon>
+          {{ t('download.button') }}
+        </a>
+      </div>
+      <div *ngIf="!contentUrl" class="loading-indicator">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </div>
+  </div>
+</div>

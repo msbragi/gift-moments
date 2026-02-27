@@ -1,0 +1,90 @@
+/* filepath: /workspace/angular/time-caps/tc-app/src/app/Components/login/login.component.scss */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: var(--mat-sys-level4, 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12), 0px 3px 5px -1px rgba(0, 0, 0, 0.2));
+  text-align: center;
+}
+
+.login-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #888;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ccc;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.google-button {
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.actions button {
+  font-size: 0.9rem;
+}
+
+.google-button {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+  gap: 0.5rem; /* Add spacing between the logo and text */
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: none; /* Prevent uppercase transformation */
+  padding: 0.5rem 1rem; /* Add padding for better spacing */
+  line-height: normal; /* Reset line-height to avoid misalignment */
+  height: 48px; /* Ensure consistent button height */
+}
+
+.google-logo {
+  width: 20px; /* Adjust size for better alignment */
+  height: 20px;
+  display: inline-block; /* Ensure the logo behaves like an inline element */
+  vertical-align: middle; /* Align the logo with the text */
+}

@@ -1,0 +1,30 @@
+<div class="quick-access-container" *transloco="let t">
+  <div class="quick-access-list">
+    <div 
+      *ngFor="let action of quickActions" 
+      class="quick-action-item"
+      (click)="navigateTo(action.route, action.queryParams)">
+      <div class="action-icon">
+        <mat-icon [class]="'action-icon-' + action.color">
+          {{action.icon}}
+        </mat-icon>
+      </div>
+      <div class="action-content">
+        <div class="action-title">
+          {{ t(action.label) }}
+          @if (action.count !== undefined) {
+            <span class="action-count-badge">{{ action.count }}</span>
+          }
+        </div>
+        <div class="action-description">
+          @if (action.lastActivity) {
+            {{ t('dashboard.lastActivity') }}: {{ action.lastActivity | date:'short' }}
+          } @else {
+            {{ action.description }}
+          }
+        </div>
+      </div>
+      <mat-icon class="action-arrow">chevron_right</mat-icon>
+    </div>
+  </div>
+</div>

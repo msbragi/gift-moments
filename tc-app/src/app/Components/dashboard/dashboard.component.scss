@@ -1,0 +1,77 @@
+.main-dashboard-container {
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  
+  h1 {
+    margin: 0;
+  }
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-timeline {
+  width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  
+  &.compact {
+    grid-template-columns: 1fr;
+  }
+  
+  section {
+    height: 450px; // Fixed height for all dashboard panels
+  }
+  
+  mat-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    mat-card-content {
+      flex: 1;
+      overflow: hidden;
+      padding: 16px 16px 16px 16px !important;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .main-dashboard-container {
+    padding: 8px;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}

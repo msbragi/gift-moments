@@ -1,0 +1,38 @@
+<div *transloco="let t" class="table-container">
+    <table mat-table [dataSource]="items" class="items-table mat-elevation-z1">
+
+        <!-- Icon Column -->
+        <ng-container matColumnDef="icon">
+            <td mat-cell *matCellDef="let item" class="icon-column">
+                <mat-icon>{{ getIcon(item) }}</mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="name">
+            <td mat-cell *matCellDef="let item" class="type-column">
+                {{ item.name }}
+            </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="created">
+            <td mat-cell *matCellDef="let item" class="date-column">
+                {{ item.created | dateformat }}
+            </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <td mat-cell *matCellDef="let item" class="actions-column">
+                <tc-action-buttons 
+                    [buttons]="getItemActions()"
+                    (action)="onItemAction($event, item)">
+                </tc-action-buttons>
+            </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="item-row"></tr>
+    </table>
+</div>

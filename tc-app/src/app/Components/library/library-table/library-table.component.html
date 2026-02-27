@@ -1,0 +1,63 @@
+<div *transloco="let t; read: 'library'" class="table-container" [class.embedded]="isEmbedded">
+    <table mat-table [dataSource]="items" class="library-table mat-elevation-z1">
+        
+        <!-- Selection Column -->
+        <ng-container matColumnDef="selection">
+            <td mat-cell *matCellDef="let item" class="mat-column-selection">
+                <mat-checkbox *ngIf="selectable"
+                    [checked]="isItemSelected(item)"
+                    (click)="$event.stopPropagation(); onItemSelect(item, $event)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+        
+        <!-- Icon Column -->
+        <ng-container matColumnDef="icon">
+            <td mat-cell *matCellDef="let item" class="mat-column-icon">
+                <mat-icon>{{ getIcon(item) }}</mat-icon>
+            </td>
+        </ng-container>
+        
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <td mat-cell *matCellDef="let item" class="name-column">
+                {{ item.name || t('unnamed_item') }}
+            </td>
+        </ng-container>
+        
+        <!-- Meta Column -->
+        <ng-container matColumnDef="meta">
+            <td mat-cell *matCellDef="let item" class="meta-column">
+                <div class="meta-info">
+                    <span class="item-type">{{ item.contentType }}</span>
+                </div>
+            </td>
+        </ng-container>
+        
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <td mat-cell *matCellDef="let item" class="mat-column-actions">
+                <button mat-icon-button aria-label="View" (click)="onItemView(item, $event)" matTooltip="{{ t('common.tooltips.view') }}">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Delete" (click)="onItemDelete(item, $event)" matTooltip="{{ t('common.tooltips.delete') }}">
+                    <mat-icon color="warn">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        
+        <!-- Header and data rows -->
+        <tr mat-row *matRowDef="let item; columns: displayedColumns;" 
+            [class.selected-row]="isItemSelected(item)"
+            [class.selectable-row]="selectable"
+            (click)="selectable && onItemSelect(item)">
+        </tr>
+        
+        <!-- No Data Row -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                {{ t('no_items') }}
+            </td>
+        </tr>
+    </table>
+</div>

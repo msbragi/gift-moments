@@ -1,0 +1,124 @@
+<div class="payment-dialog" *transloco="let t">
+
+  <!-- Header -->
+  <div class="dialog-header">
+    <h2>{{ t('payments.complete_purchase') }}</h2>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-indicator">
+    <mat-progress-bar mode="determinate" [value]="(currentStep + 1) * 25"></mat-progress-bar>
+    <div class="step-labels">
+      <span [class.active]="currentStep >= 0">{{ t('payments.summary') }}</span>
+      <span [class.active]="currentStep >= 1">{{ t('payments.payment_method') }}</span>
+      <span [class.active]="currentStep >= 2">{{ t('payments.confirm') }}</span>
+      <span [class.active]="currentStep >= 3">{{ t('payments.processing') }}</span>
+    </div>
+  </div>
+
+  <!-- Content based on current step -->
+  <div class="dialog-content">
+
+    <!-- Step 0: Plan Summary -->
+    @if (currentStep === STEPS.SUMMARY) {
+    <div class="step-content">
+      <h3>{{ t('payments.order_summary') }}</h3>
+      <mat-card class="plan-summary">
+        <mat-card-header>
+          <mat-card-title>{{ plan.displayName }}</mat-card-title>
+          <mat-card-subtitle>{{ plan.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="price">
+            <span class="amount">${{ plan.priceOnetime }}</span>
+            <span class="currency">{{ t('common.one_time_payment') }}</span>
+          </div>
+          <div class="duration">
+            {{ t('payments.valid_for_months', { months: plan.durationMonths }) }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }
+
+    <!-- Step 1: Payment Method Selection -->
+    @if (currentStep === STEPS.PAYMENT_METHOD) {
+    <div class="step-content">
+      <h3>{{ t('payments.choose_payment_method') }}</h3>
+      <div class="gateway-options">
+        @for (gateway of availableGateways; track gateway.code) {
+        <mat-card class="gateway-option" [class.selected]="selectedGateway?.code === gateway.code"
+          (click)="onGatewaySelected(gateway)">
+          <div class="gateway-content">
+            <img [src]="gateway.logo" [alt]="gateway.name" class="gateway-logo">
+            <div class="gateway-info">
+              <h4>{{ gateway.displayName }}</h4>
+            </div>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </div>
+        </mat-card>
+        }
+      </div>
+    </div>
+    }
+
+    <!-- Step 2: Confirm Payment -->
+    @if (currentStep === STEPS.CONFIRM) {
+    <div class="step-content">
+      <h3>{{ t('payments.confirm_payment') }}</h3>
+      <mat-card>
+        <mat-card-content>
+          <div><strong>{{ plan.displayName }}</strong> - ${{ plan.priceOnetime }}</div>
+          <div>{{ t('payments.payment_via') }} {{ selectedGateway?.displayName }}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }
+
+    <!-- Step 3: Processing -->
+    <!-- Nel step PROCESSING, sostituisci con: -->
+    @if (currentStep === STEPS.PROCESSING) {
+    <div class="step-content processing">
+      @if (!paymentTransaction) {
+      <div class="preparing">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <p>{{ 'payments.preparing_order' | transloco }}</p>
+      </div>
+      } @else {
+      <!-- NgComponentOutlet - Molto più pulito! -->
+      <ng-container *ngComponentOutlet="gatewayComponentType; inputs: gatewayInputs">
+      </ng-container>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- Actions -->
+  <div class="dialog-actions">
+    @if (currentStep === STEPS.SUMMARY) {
+    <button mat-button (click)="close()">{{ t('common.cancel') }}</button>
+    <button mat-raised-button color="primary" (click)="nextStep()">
+      {{ t('common.continue') }}
+    </button>
+    }
+
+    @if (currentStep === STEPS.PAYMENT_METHOD) {
+    <button mat-button (click)="previousStep()">{{ t('common.back') }}</button>
+    }
+
+    @if (currentStep === STEPS.CONFIRM) {
+    <button mat-button (click)="previousStep()">{{ t('common.back') }}</button>
+    <button mat-raised-button color="primary" (click)="onConfirmPayment()" [disabled]="isProcessing">
+      {{ t('payments.proceed_to_payment') }}
+    </button>
+    }
+
+    @if (currentStep === STEPS.PROCESSING) {
+    <button mat-button (click)="close()">{{ t('common.cancel') }}</button>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    
+    &.embedded {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+}
+
+.library-table {
+    width: 100%;
+    min-width: 500px;
+    table-layout: fixed;
+    
+    .mat-mdc-row {
+        &.selected-row {
+            background-color: var(--mdc-theme-primary-light, rgba(33, 150, 243, 0.1));
+        }
+        
+        &.selectable-row {
+            cursor: pointer;
+            
+            &:hover {
+                background-color: var(--mdc-theme-surface-hover, rgba(0, 0, 0, 0.04));
+            }
+        }
+    }
+    
+    // Fixed column widths for better responsiveness
+    .mat-column-selection {
+        width: 40px;
+        overflow: visible;
+    }
+    
+    .mat-column-icon {
+        width: 48px;
+        overflow: visible;
+    }
+    
+    .mat-column-actions {
+        width: 96px;
+        text-align: right;
+    }
+    
+    .name-column {
+        font-weight: 500;
+        padding-right: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .meta-column {
+        .meta-info {
+            display: flex;
+            flex-direction: column;
+            
+            .item-type {
+                font-size: 0.85rem;
+                color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.6));
+            }
+        }
+    }
+}
+
+// Add responsive adjustments
+@media (max-width: 600px) {
+    .library-table {
+        .meta-column {
+            display: none;
+        }
+    }
+}

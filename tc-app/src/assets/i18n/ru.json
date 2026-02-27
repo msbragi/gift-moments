@@ -1,0 +1,197 @@
+{
+  "atranslation-hint": "Эта страница доступна только на английском языке. Используйте функцию перевода вашего браузера для других языков.",
+  "capsule_items": {
+    "grid_view": "TRANSLATE ME",
+    "list_view": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "select_capsule": "TRANSLATE ME",
+    "upload": "TRANSLATE ME"
+  },
+  "capsules": {
+    "basic_info": "TRANSLATE ME",
+    "capsule": {
+      "items": "TRANSLATE ME",
+      "name": "TRANSLATE ME",
+      "no_description": "TRANSLATE ME",
+      "opens": "TRANSLATE ME",
+      "status": {
+        "status": "TRANSLATE ME"
+      }
+    },
+    "description": "TRANSLATE ME",
+    "description_placeholder": "TRANSLATE ME",
+    "is_physical": "TRANSLATE ME",
+    "is_physical_description": "TRANSLATE ME",
+    "is_public": "TRANSLATE ME",
+    "is_public_description": "TRANSLATE ME",
+    "latitude": "TRANSLATE ME",
+    "legend": {
+      "help": "TRANSLATE ME",
+      "subtitle": "TRANSLATE ME",
+      "title": "TRANSLATE ME"
+    },
+    "location": "TRANSLATE ME",
+    "longitude": "TRANSLATE ME",
+    "map_coming_soon": "TRANSLATE ME",
+    "name": "TRANSLATE ME",
+    "name_placeholder": "TRANSLATE ME",
+    "open_date": "TRANSLATE ME",
+    "options": "TRANSLATE ME",
+    "panels": {
+      "capsules": {
+        "empty": "TRANSLATE ME",
+        "new": "TRANSLATE ME",
+        "title": "TRANSLATE ME"
+      },
+      "contents": {
+        "title": "TRANSLATE ME"
+      },
+      "library": {
+        "title": "TRANSLATE ME"
+      },
+      "recipients": {
+        "title": "TRANSLATE ME"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "cancel": "TRANSLATE ME",
+      "create": "TRANSLATE ME",
+      "update": "TRANSLATE ME"
+    },
+    "delete": "TRANSLATE ME",
+    "validation": {
+      "max_length": "TRANSLATE ME",
+      "required": "TRANSLATE ME"
+    },
+    "view": "TRANSLATE ME"
+  },
+  "dashboard": {
+    "charts": {
+      "select_metric": "TRANSLATE ME",
+      "select_type": "TRANSLATE ME"
+    },
+    "common": {
+      "loading": "TRANSLATE ME"
+    },
+    "global": {
+      "registeredUsers": "TRANSLATE ME",
+      "statistics": "TRANSLATE ME"
+    },
+    "user": {
+      "statistics": "TRANSLATE ME"
+    }
+  },
+  "emailVerification": {
+    "accountVerified": "Ваша учетная запись успешно подтверждена. Теперь вы можете войти в Gift Moment.",
+    "backToLogin": "Вернуться к входу",
+    "checkEmail": "Проверьте свою электронную почту",
+    "checkSpam": "Если вы не видите письмо, проверьте папку со спамом.",
+    "linkExpired": "Срок действия ссылки для подтверждения истек. Пожалуйста, запросите новую.",
+    "proceedToLogin": "Перейти к входу",
+    "resendVerification": "Отправить письмо для подтверждения повторно",
+    "verificationFailed": "Ошибка подтверждения",
+    "verificationSent": "Мы отправили ссылку для подтверждения на ваш адрес электронной почты. Пожалуйста, нажмите на ссылку для подтверждения вашей учетной записи.",
+    "verificationSuccess": "Электронная почта подтверждена!",
+    "verifying": "Проверка вашего адреса электронной почты..."
+  },
+  "forgotPassword": {
+    "backToLogin": "Назад к входу",
+    "cancel": "Отмена",
+    "checkEmail": "Проверьте свой адрес электронной почты",
+    "emailInvalid": "Введите действительный адрес электронной почты",
+    "emailLabel": "Электронная почта",
+    "emailPlaceholder": "Введите свой адрес электронной почты",
+    "emailRequired": "Требуется адрес электронной почты",
+    "enterEmail": "Введите свой адрес электронной почты, и мы отправим вам ссылку для сброса пароля",
+    "resetLinkSent": "Мы отправили ссылку для сброса пароля на ваш адрес электронной почты. Проверьте свой почтовый ящик и следуйте инструкциям.",
+    "resetPassword": "Сброс пароля",
+    "sendResetLink": "Отправить ссылку для сброса",
+    "sending": "Отправка..."
+  },
+  "library": {
+    "common": {
+      "tooltips": {
+        "delete": "TRANSLATE ME",
+        "view": "TRANSLATE ME"
+      }
+    },
+    "empty": "TRANSLATE ME",
+    "filters": {
+      "all": "TRANSLATE ME"
+    },
+    "loading": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "search": "TRANSLATE ME",
+    "title": "TRANSLATE ME",
+    "unnamed_item": "TRANSLATE ME",
+    "upload": "TRANSLATE ME",
+    "upload_files": "TRANSLATE ME"
+  },
+  "login": {
+    "Welcome": "добро пожаловать в Gift Moment",
+    "emailError": "Ваш email адрес некорректен.",
+    "emailInput": "Ваш Email",
+    "emailLabel": "Отправить письмо",
+    "forgotPwdButton": "Забыли пароль?",
+    "googleButton": "Вход в систему с помощью google",
+    "loginButton": "Войти",
+    "passwordError": "«Ваш пароль недействителен»",
+    "passwordInput": "Введите свой пароль",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "TRANSLATE ME",
+    "passwordRequired": "TRANSLATE ME",
+    "registerButton": "зарегистрироваться"
+  },
+  "recipients": {
+    "add": "TRANSLATE ME",
+    "empty": "TRANSLATE ME",
+    "title": "TRANSLATE ME"
+  },
+  "register": {
+    "alreadyHaveAccount": "У вас уже есть аккаунт?",
+    "confirmPasswordLabel": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите ваш пароль",
+    "confirmPasswordRequired": "Пожалуйста, подтвердите ваш пароль",
+    "createAccount": "Создать аккаунт",
+    "emailInvalid": "Пожалуйста, введите действительный адрес электронной почты",
+    "emailLabel": "Электронная почта",
+    "emailPlaceholder": "Введите вашу электронную почту",
+    "emailRequired": "Электронная почта обязательна",
+    "fullNameInvalid": "TRANSLATE ME",
+    "fullNameLabel": "Имя",
+    "fullNamePlaceholder": "Введите свое полное имя",
+    "fullNameRequired": "Имя обязательно",
+    "loginLink": "Войти",
+    "passwordLabel": "Пароль",
+    "passwordMinLength": "Пароль должен содержать не менее 8 символов",
+    "passwordPlaceholder": "Создайте пароль",
+    "passwordRequired": "Пароль обязателен",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "registerButton": "Создать аккаунт",
+    "termsCheckbox": "Я согласен с",
+    "termsLink": "Условиями использования",
+    "termsRequired": "Вы должны принять условия для регистрации"
+  },
+  "resetPassword": {
+    "backToLogin": "Назад к входу",
+    "canNowLogin": "Ваш пароль успешно сброшен. Теперь вы можете войти с новым паролем.",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите новый пароль",
+    "confirmPasswordRequired": "Подтвердите пароль",
+    "enterNewPassword": "Введите новый пароль ниже.",
+    "newPassword": "Новый пароль",
+    "passwordMinLength": "Пароль должен быть не менее 8 символов",
+    "passwordPlaceholder": "Введите новый пароль",
+    "passwordRequired": "Требуется пароль",
+    "passwordResetSuccess": "Сброс пароля выполнен успешно",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "requestNewLink": "Запросить новую ссылку",
+    "resetPassword": "Сброс пароля",
+    "resetYourPassword": "Сброс пароля",
+    "resetting": "Сброс...",
+    "tokenInvalid": "Ссылка для сброса пароля недействительна или устарела"
+  },
+  "unnamed_item": "TRANSLATE ME"
+}

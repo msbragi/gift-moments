@@ -1,0 +1,99 @@
+/**
+ * Capsules component layout
+ * Implements responsive, flexible layout following Material Design guidelines
+ */
+.capsules-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  // Ensure proper overflow handling
+  overflow: hidden;
+}
+
+:host ::ng-deep .list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+  min-height: 64px;
+  height: auto;
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// Update only the panels-layout and responsive sections
+
+.panels-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0; // Important for proper flex child behavior with overflow
+  padding: 16px;
+  gap: 16px;
+  
+  .main-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; // Prevent flex items from overflowing
+  }
+
+  .side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; // Prevent flex items from overflowing
+
+    // Material Design styling for accordions
+    .mat-expansion-panel {
+      margin: 16px 0 8px; // Use Material's 8px increments
+      overflow: visible;
+    }
+  }
+}
+
+// Responsive styling
+@media (max-width: 1024px) {
+  .panels-layout {
+    flex-direction: column;
+    // Remove overflow: auto to prevent container scrolling
+    // overflow: auto;
+    padding: 12px;
+    gap: 12px;
+
+    // Additional change - make container take full height
+    flex: 1;
+    display: flex;
+
+    .main-panel,
+    .side-panel {
+      flex: 0 0 auto; // Don't allow panels to shrink or grow
+      width: 100%;
+      
+      // Additional important fix to allow content flow
+      overflow: visible;
+    }
+    
+    .main-panel {
+      margin-bottom: 16px; // Add spacing between panels
+    }
+    
+    .side-panel {
+      // Remove any fixed height calculations causing the gap
+      max-height: none;
+      height: auto;
+      
+      // Remove unneeded overflow property to avoid scroll containers
+      overflow: visible;
+      
+      .mat-expansion-panel {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="lang-picker">
+  <button mat-button [matMenuTriggerFor]="langMenu">
+    🌐 {{ getCurrentLang()?.label?.toUpperCase() }}
+  </button>
+  <mat-menu #langMenu="matMenu" class="lang-menu">
+    <button class="lang-item" mat-menu-item *ngFor="let lang of languages" (click)="changeLang(lang.code)">
+      <span class="flag">
+        <img [src]="'assets/img/flags/' + lang.code + '.png'" [alt]="lang.label + ' flag'" />
+      </span>
+      <span class="label">{{ lang.description }}</span>
+    </button>
+  </mat-menu>
+</div>

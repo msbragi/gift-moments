@@ -1,0 +1,125 @@
+<div class="notification-container" *transloco="let t; read: 'dashboard'">
+  <ng-container *ngIf="filteredNotifications$ | async as notifications; else loading">
+    <div class="notification-header">
+      <!-- All buttons in one row -->
+      <div class="header-buttons">
+        <!-- View toggle buttons -->
+        <button mat-stroked-button 
+                [color]="!showArchived ? 'primary' : ''"
+                [class.active]="!showArchived"
+                (click)="!showArchived || toggleArchiveView()">
+          <mat-icon>notifications_active</mat-icon>
+          {{ t('notifications.new') || 'New' }}
+        </button>
+        
+        <button mat-stroked-button 
+                [color]="showArchived ? 'primary' : ''"
+                [class.active]="showArchived"
+                (click)="showArchived || toggleArchiveView()">
+          <mat-icon>archive</mat-icon>
+          {{ t('notifications.archived') || 'Archived' }}
+        </button>
+
+        <!-- Divider -->
+        <mat-divider [vertical]="true"></mat-divider>
+
+        <!-- Action buttons -->
+        <ng-container *ngIf="!showArchived">
+          <!-- New notifications view actions -->
+          <ng-container *ngIf="notifications && notifications.length > 0">
+            <button mat-stroked-button color="primary" (click)="archiveAllNotifications()">
+              <mat-icon>archive</mat-icon>
+              Archive All
+            </button>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="showArchived">
+          <!-- Archived notifications view actions -->
+          <button mat-stroked-button color="accent" *ngIf="notifications && notifications.length > 0" (click)="unarchiveAllNotifications()">
+            <mat-icon>unarchive</mat-icon>
+            Unarchive All
+          </button>
+          
+          <button
+            class="delete-button" 
+            mat-stroked-button color="warn" 
+            *ngIf="notifications && notifications.length > 0" 
+            (click)="deleteAllNotifications()">
+            <mat-icon>delete</mat-icon>
+            Delete All
+          </button>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="notifications-content">
+      <ng-container *ngIf="notifications && notifications.length > 0; else noNotifications">
+        <mat-nav-list>
+          <mat-list-item *ngFor="let notification of notifications" 
+                         [class.unread]="!notification.isRead"
+                         [class.archived]="notification.isArchived">
+
+            <mat-icon matListItemIcon [ngClass]="getIconClass(notification)">
+              {{ getIcon(notification.type) }}
+            </mat-icon>
+
+            <div matListItemTitle>{{ notification.title }}</div>
+            <div matListItemLine>{{ notification.message }}</div>
+            <div matListItemLine class="notification-time">{{ formatRelativeTime(notification.createdAt) }}</div>
+
+            <!-- Actions for New notifications -->
+            <ng-container *ngIf="!showArchived" matListItemMeta>
+              <button mat-icon-button *ngIf="!notification.isRead"
+                (click)="$event.stopPropagation(); markAsRead(notification)" 
+                [attr.aria-label]="t('notifications.markAsRead') || 'Mark as read'">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button 
+                (click)="$event.stopPropagation(); archiveNotification(notification)"
+                [attr.aria-label]="t('notifications.archive') || 'Archive'">
+                <mat-icon>archive</mat-icon>
+              </button>
+            </ng-container>
+
+            <!-- Actions for Archived notifications -->
+            <ng-container *ngIf="showArchived" matListItemMeta>
+              <button mat-icon-button 
+                (click)="$event.stopPropagation(); unarchiveNotification(notification)"
+                [attr.aria-label]="t('notifications.unarchive') || 'Unarchive'"
+                color="accent">
+                <mat-icon>unarchive</mat-icon>
+              </button>
+              
+              <button mat-icon-button 
+                (click)="$event.stopPropagation(); deleteNotification(notification)"
+                [attr.aria-label]="t('notifications.delete') || 'Delete permanently'"
+                class="delete-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-container>
+
+      <ng-template #noNotifications>
+        <div class="no-notifications">
+          <mat-icon>{{ showArchived ? 'archive' : 'notifications_none' }}</mat-icon>
+          <p>
+            {{ showArchived 
+              ? (t('notifications.noArchived') || 'No archived notifications') 
+              : (t('notifications.noNotifications') || 'No new notifications') 
+            }}
+          </p>
+        </div>
+      </ng-template>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="no-notifications">
+      <mat-icon>notifications_none</mat-icon>
+      <p>{{ t('notifications.noNotifications') || 'No notifications' }}</p>
+    </div>
+  </ng-template>
+</div>

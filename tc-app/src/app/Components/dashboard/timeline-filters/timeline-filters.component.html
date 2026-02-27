@@ -1,0 +1,67 @@
+<!-- Timeline Filters Component -->
+<div class="timeline-filters" *transloco="let t">
+  <!-- Quick Filter Section -->
+  <div class="filter-section">
+    <h3 class="filter-title">
+      <mat-icon>filter_list</mat-icon>
+      {{ t('dashboard.timeline.filters.title') }}
+    </h3>
+    
+    <!-- Time Range and Visibility Selects -->
+    <div class="filter-row">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>{{ t('dashboard.timeline.filters.timeRange') }}</mat-label>
+        <mat-select [(value)]="filter.timeRange" (selectionChange)="onTimeRangeChange()">
+          <mat-option *ngFor="let option of timeRangeOptions" [value]="option.value">
+            {{ t('dashboard.timeline.filters.' + option.value) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>{{ t('dashboard.timeline.filters.visibility') }}</mat-label>
+        <mat-select [(value)]="filter.visibility" (selectionChange)="onVisibilityChange()">
+          <mat-option *ngFor="let option of visibilityOptions" [value]="option.value">
+            {{ t('dashboard.timeline.filters.' + option.value) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-stroked-button 
+              class="clear-btn"
+              (click)="onClearFilters()"
+              [attr.aria-label]="t('dashboard.timeline.filters.clear')">
+        <mat-icon>clear_all</mat-icon>
+        {{ t('dashboard.timeline.filters.clear') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Event Type Filters -->
+  <div class="filter-section">
+    <h4 class="filter-subtitle">{{ t('dashboard.timeline.filters.eventTypes') }}</h4>
+    <mat-chip-set class="filter-chips" aria-label="Event type selection">
+      <mat-chip *ngFor="let option of eventTypeOptions"
+                [class.selected]="isEventTypeSelected(option.value)"
+                (click)="toggleEventType(option.value)"
+                [attr.aria-pressed]="isEventTypeSelected(option.value)">
+        <mat-icon *ngIf="option.icon">{{ option.icon }}</mat-icon>
+        {{ t('dashboard.timeline.filters.' + option.value) }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+
+  <!-- Content Type Filters -->
+  <div class="filter-section">
+    <h4 class="filter-subtitle">{{ t('dashboard.timeline.filters.contentTypes') }}</h4>
+    <mat-chip-set class="filter-chips" aria-label="Content type selection">
+      <mat-chip *ngFor="let option of contentTypeOptions"
+                [class.selected]="isContentTypeSelected(option.value)"
+                (click)="toggleContentType(option.value)"
+                [attr.aria-pressed]="isContentTypeSelected(option.value)">
+        <mat-icon *ngIf="option.icon">{{ option.icon }}</mat-icon>
+        {{ t('dashboard.timeline.filters.' + option.value) }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</div>

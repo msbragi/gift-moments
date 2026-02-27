@@ -1,0 +1,67 @@
+<div *transloco="let t" class="capsule-table-container">
+    <mat-card *ngIf="capsules.length === 0" class="empty-state">
+    {{ t('capsule.panels.capsule.empty') }} 
+    <a matButton routerLink="/subscription-plans">{{ t('capsule.panels.capsule.get_capsule') }}</a>
+    </mat-card>
+  
+    <div class="mat-elevation-z1">
+      <table mat-table [dataSource]="capsules" matSort class="capsule-table" *ngIf="capsules.length > 0">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('capsule.name') }}</th>
+          <td mat-cell *matCellDef="let capsule" class="name-cell" (click)="onRowClick(capsule)">
+            <div class="capsule-name-container">
+              <div class="capsule-name">{{ capsule.name }}</div>
+              <div class="capsule-description">{{ capsule.description || t('capsule.no_description') }}</div>
+            </div>
+          </td>
+        </ng-container>
+    
+        <!-- Open Date Column -->
+        <ng-container matColumnDef="openDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('capsule.opens') }}</th>
+          <td mat-cell *matCellDef="let capsule" (click)="onRowClick(capsule)">
+            <div class="date-cell">
+              <mat-icon class="small-icon">{{ UI_CONSTANTS.metadata.openDate.icon }}</mat-icon>
+              <span>{{ capsule.openDate | date:'mediumDate' }}</span>
+            </div>
+          </td>
+        </ng-container>
+    
+        <!-- Items Count Column -->
+        <ng-container matColumnDef="itemsCount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('capsule.items') }}</th>
+          <td mat-cell *matCellDef="let capsule" (click)="onRowClick(capsule)">
+            <div class="count-cell">
+              <span class="count-badge mat-primary">{{ capsule.items?.length || 0 }}</span>
+            </div>
+          </td>
+        </ng-container>
+    
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>{{ t('capsule.status.status') }}</th>
+          <td mat-cell *matCellDef="let capsule" (click)="onRowClick(capsule)">
+            <tc-capsule-status [capsule]="capsule"></tc-capsule-status>
+          </td>
+        </ng-container>
+    
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let capsule" class="actions-cell">
+            <tc-capsule-actions 
+              *ngIf="showActions"
+              [capsuleId]="capsule.id || 0" 
+              (action)="onAction($event, capsule)">
+            </tc-capsule-actions>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let capsule; columns: displayedColumns;"
+            [class.selected-row]="isSelected(capsule)">
+        </tr>
+      </table>
+    </div>
+  </div>

@@ -1,0 +1,197 @@
+{
+  "atranslation-hint": "Esta página está disponible solo en inglés. Utiliza la función de traducción de tu navegador para otros idiomas.",
+  "capsule_items": {
+    "grid_view": "TRANSLATE ME",
+    "list_view": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "select_capsule": "TRANSLATE ME",
+    "upload": "TRANSLATE ME"
+  },
+  "capsules": {
+    "basic_info": "TRANSLATE ME",
+    "capsule": {
+      "items": "TRANSLATE ME",
+      "name": "TRANSLATE ME",
+      "no_description": "TRANSLATE ME",
+      "opens": "TRANSLATE ME",
+      "status": {
+        "status": "TRANSLATE ME"
+      }
+    },
+    "description": "TRANSLATE ME",
+    "description_placeholder": "TRANSLATE ME",
+    "is_physical": "TRANSLATE ME",
+    "is_physical_description": "TRANSLATE ME",
+    "is_public": "TRANSLATE ME",
+    "is_public_description": "TRANSLATE ME",
+    "latitude": "TRANSLATE ME",
+    "legend": {
+      "help": "TRANSLATE ME",
+      "subtitle": "TRANSLATE ME",
+      "title": "TRANSLATE ME"
+    },
+    "location": "TRANSLATE ME",
+    "longitude": "TRANSLATE ME",
+    "map_coming_soon": "TRANSLATE ME",
+    "name": "TRANSLATE ME",
+    "name_placeholder": "TRANSLATE ME",
+    "open_date": "TRANSLATE ME",
+    "options": "TRANSLATE ME",
+    "panels": {
+      "capsules": {
+        "empty": "TRANSLATE ME",
+        "new": "TRANSLATE ME",
+        "title": "TRANSLATE ME"
+      },
+      "contents": {
+        "title": "TRANSLATE ME"
+      },
+      "library": {
+        "title": "TRANSLATE ME"
+      },
+      "recipients": {
+        "title": "TRANSLATE ME"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "cancel": "TRANSLATE ME",
+      "create": "TRANSLATE ME",
+      "update": "TRANSLATE ME"
+    },
+    "delete": "TRANSLATE ME",
+    "validation": {
+      "max_length": "TRANSLATE ME",
+      "required": "TRANSLATE ME"
+    },
+    "view": "TRANSLATE ME"
+  },
+  "dashboard": {
+    "charts": {
+      "select_metric": "TRANSLATE ME",
+      "select_type": "TRANSLATE ME"
+    },
+    "common": {
+      "loading": "TRANSLATE ME"
+    },
+    "global": {
+      "registeredUsers": "TRANSLATE ME",
+      "statistics": "TRANSLATE ME"
+    },
+    "user": {
+      "statistics": "TRANSLATE ME"
+    }
+  },
+  "emailVerification": {
+    "accountVerified": "Tu cuenta ha sido verificada exitosamente. Ahora puedes iniciar sesión en Gift Moment.",
+    "backToLogin": "Volver al inicio de sesión",
+    "checkEmail": "Revisa tu correo electrónico",
+    "checkSpam": "Si no ves el correo electrónico, revisa tu carpeta de spam.",
+    "linkExpired": "El enlace de verificación ha expirado. Por favor solicita uno nuevo.",
+    "proceedToLogin": "Proceder al inicio de sesión",
+    "resendVerification": "Reenviar correo de verificación",
+    "verificationFailed": "Verificación fallida",
+    "verificationSent": "Hemos enviado un enlace de verificación a tu dirección de correo electrónico. Haz clic en el enlace para verificar tu cuenta.",
+    "verificationSuccess": "¡Correo electrónico verificado!",
+    "verifying": "Verificando tu dirección de correo electrónico..."
+  },
+  "forgotPassword": {
+    "backToLogin": "Volver al inicio de sesión",
+    "cancel": "Cancelar",
+    "checkEmail": "Revisa tu correo electrónico",
+    "emailInvalid": "Ingresa un correo electrónico válido",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "enterEmail": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+    "resetLinkSent": "Te hemos enviado un enlace para restablecer tu contraseña a tu correo electrónico. Revisa tu bandeja de entrada y sigue las instrucciones.",
+    "resetPassword": "Restablecer contraseña",
+    "sendResetLink": "Enviar enlace para restablecer",
+    "sending": "Enviando..."
+  },
+  "library": {
+    "common": {
+      "tooltips": {
+        "delete": "TRANSLATE ME",
+        "view": "TRANSLATE ME"
+      }
+    },
+    "empty": "TRANSLATE ME",
+    "filters": {
+      "all": "TRANSLATE ME"
+    },
+    "loading": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "search": "TRANSLATE ME",
+    "title": "TRANSLATE ME",
+    "unnamed_item": "TRANSLATE ME",
+    "upload": "TRANSLATE ME",
+    "upload_files": "TRANSLATE ME"
+  },
+  "login": {
+    "Welcome": "Bienvenido a Gift Moment",
+    "emailError": "Su dirección de correo electrónico no es válida",
+    "emailInput": "Su dirección de correo electrónico aquí",
+    "emailLabel": "Correo electrónico",
+    "forgotPwdButton": "¿Olvidaste tu contraseña?",
+    "googleButton": "Iniciar sesión con Google",
+    "loginButton": "Acceso",
+    "passwordError": "Su contraseña no es válida",
+    "passwordInput": "Tu contraseña aquí",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "TRANSLATE ME",
+    "passwordRequired": "TRANSLATE ME",
+    "registerButton": "inscribirse"
+  },
+  "recipients": {
+    "add": "TRANSLATE ME",
+    "empty": "TRANSLATE ME",
+    "title": "TRANSLATE ME"
+  },
+  "register": {
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "confirmPasswordLabel": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Confirma tu contraseña",
+    "confirmPasswordRequired": "Por favor confirme su contraseña",
+    "createAccount": "Crear cuenta",
+    "emailInvalid": "Por favor, introduce un correo electrónico válido",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "Introduzca su correo electrónico",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "fullNameInvalid": "TRANSLATE ME",
+    "fullNameLabel": "Nombre",
+    "fullNamePlaceholder": "Inserta tu nombre completo",
+    "fullNameRequired": "El nombre es obligatorio",
+    "loginLink": "Iniciar sesión",
+    "passwordLabel": "Contraseña",
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordPlaceholder": "Crea una contraseña",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "registerButton": "Crear cuenta",
+    "termsCheckbox": "Estoy de acuerdo con los",
+    "termsLink": "Términos de servicio",
+    "termsRequired": "Debes aceptar los términos para registrarte"
+  },
+  "resetPassword": {
+    "backToLogin": "Volver al inicio de sesión",
+    "canNowLogin": "Su contraseña se ha restablecido correctamente. Ahora puede iniciar sesión con su nueva contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Confirme su nueva contraseña",
+    "confirmPasswordRequired": "Por favor, confirme su contraseña",
+    "enterNewPassword": "Por favor, introduzca su nueva contraseña a continuación.",
+    "newPassword": "Nueva contraseña",
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordPlaceholder": "Introduzca la nueva contraseña",
+    "passwordRequired": "Se requiere contraseña",
+    "passwordResetSuccess": "Restablecimiento de contraseña exitoso",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "requestNewLink": "Solicitar un nuevo enlace",
+    "resetPassword": "Restablecer contraseña",
+    "resetYourPassword": "Restablecer su contraseña",
+    "resetting": "Restableciendo...",
+    "tokenInvalid": "El enlace de restablecimiento de contraseña no es válido o ha \"caducado"
+  },
+  "unnamed_item": "TRANSLATE ME"
+}

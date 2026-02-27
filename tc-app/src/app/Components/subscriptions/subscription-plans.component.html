@@ -1,0 +1,126 @@
+<div class="subscription-plans-container" *transloco="let t;">
+  <div *ngIf="state$ | async as state" class="plans-content">
+
+    <!-- Header -->
+    <div class="plans-header">
+      <h1>{{ t('subscription_plans.title') }}</h1>
+      <p>{{ t('subscription_plans.subtitle_per_capsule') }}</p>
+    </div>
+
+    <!-- Free Plan Already Owned Message -->
+    @if (userHasFreePlan(state.currentUser)) {
+    <mat-card class="info-message free-plan-owned">
+      <mat-card-content>
+        <div class="message-content">
+          <mat-icon class="message-icon">info</mat-icon>
+          <div class="message-text">
+            <h3>{{ t('subscription_plans.free_plan_owned.title') }}</h3>
+            <p>{{ t('subscription_plans.free_plan_owned.description') }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    }
+
+    <!-- Plans Grid -->
+    <div class="plans-grid">
+      <mat-card *ngFor="let plan of state.plans; trackBy: trackByPlan" class="plan-card">
+
+        <!-- Plan Badge -->
+        <div class="plan-badge">
+          <mat-chip [color]="plan.priceOnetime === 0 ? 'accent' : 'primary'">
+            <mat-icon matChipAvatar>{{ plan.icon }}</mat-icon>
+            {{ plan.displayName }}
+          </mat-chip>
+        </div>
+
+        <mat-card-header class="plan-header">
+          <mat-card-subtitle *ngIf="plan.description">{{ plan.description }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- Price Section -->
+          <div class="price-section">
+            <div *ngIf="plan.name === 'free'" class="price-paid">
+              <span class="price-amount">$0.00</span>
+              <span class="price-period">{{ t('subscription_plans.no_repeat') }}</span>
+            </div>
+            <div *ngIf="plan.name !== 'free'" class="price-paid">
+              <span class="price-amount">${{ plan.priceOnetime }}</span>
+              <span class="price-period">{{ t('subscription_plans.one_time_payment') }}</span>
+            </div>
+
+            <!-- Duration Info -->
+            <div class="duration-info">
+              <small *ngIf="plan.durationMonths">
+                {{ t('subscription_plans.valid_for_months', { months: plan.durationMonths }) }}
+              </small>
+              <small *ngIf="!plan.durationMonths">
+                {{ t('subscription_plans.lifetime_access') }}
+              </small>
+            </div>
+          </div>
+
+          <!-- Features List -->
+          <div class="features-section">
+            <h4>{{ t('subscription_plans.plan_features.title') }}</h4>
+            <ul class="features-list">
+              <!-- Limits -->
+              <li *ngFor="let limitKey of getObjectKeys(plan.enrichedLimits); trackBy: trackByLimitKey">
+                <mat-icon>{{ plan.enrichedLimits[limitKey].uiConfig.icon }}</mat-icon>
+                <span>{{ getLimitDisplayText(limitKey, plan.enrichedLimits[limitKey].maxValue) }}</span>
+              </li>
+
+              <!-- Features -->
+              <li *ngFor="let featureKey of getObjectKeys(plan.enrichedFeatures); trackBy: trackByFeatureKey">
+                @if (plan.enrichedFeatures[featureKey].available) {
+                <mat-icon>{{ plan.enrichedFeatures[featureKey].uiConfig.icon }}</mat-icon>
+                <span>{{ getFeatureDisplayText(featureKey) }}</span>
+                }
+              </li>
+            </ul>
+          </div>
+        </mat-card-content>
+        <!-- Spacer to push actions to bottom -->
+        <div class="spacer"></div>
+        @if(state.currentUser) {
+        <mat-card-actions>
+          <button mat-raised-button [color]="plan.priceOnetime === 0 ? 'accent' : 'primary'"
+            (click)="onSelectPlan(plan)" class="plan-button">
+            {{ plan.name === 'free' ?
+            t('subscription_plans.get_free_capsule') :
+            t('subscription_plans.purchase_capsule')
+            }}
+          </button>
+        </mat-card-actions>
+        }
+      </mat-card>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>{{ t('subscription_plans.faq.title') }}</h2>
+
+      <div class="faq-item">
+        <h4>{{ t('subscription_plans.faq.per_capsule_model.question') }}</h4>
+        <p>{{ t('subscription_plans.faq.per_capsule_model.answer') }}</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>{{ t('subscription_plans.faq.free_capsule.question') }}</h4>
+        <p>{{ t('subscription_plans.faq.free_capsule.answer') }}</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>{{ t('subscription_plans.faq.premium_capsule.question') }}</h4>
+        <p>{{ t('subscription_plans.faq.premium_capsule.answer') }}</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>{{ t('subscription_plans.faq.duration.question') }}</h4>
+        <p>{{ t('subscription_plans.faq.duration.answer') }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

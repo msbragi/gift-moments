@@ -1,0 +1,36 @@
+<div class="menu-container" [class.collapsed]="collapsed">
+  <!-- Display menu items once loaded -->
+  <mat-nav-list *ngIf="menuItems.length > 0">
+    <ng-container *ngFor="let item of menuItems">
+      <!-- Regular menu item without children -->
+      @if(item.label == '_DIVIDER_') {
+      <mat-divider></mat-divider>
+      }
+      @else {
+      <a mat-list-item *ngIf="!item.children?.length" [routerLink]="item.route" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{exact: item.route === '/' || item.route === '/home'}">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle *ngIf="!collapsed">{{ item.label }}</span>
+      </a>
+      }
+      <!-- Menu item with children (submenu) -->
+      <mat-expansion-panel *ngIf="item.children?.length" [expanded]="false" class="mat-elevation-z0 menu-expansion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span *ngIf="!collapsed">{{ item.label }}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Submenu items -->
+        <mat-nav-list dense>
+          <a mat-list-item *ngFor="let child of item.children" [routerLink]="child.route" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{exact: child.route === '/' || child.route === '/home'}" class="submenu-item">
+            <mat-icon matListItemIcon>{{ child.icon }}</mat-icon>
+            <span matListItemTitle>{{ child.label }}</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-nav-list>
+</div>

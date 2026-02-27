@@ -1,0 +1,191 @@
+<div class="users-admin-container" *transloco="let t">
+  <!-- Toolbar -->
+  <mat-toolbar class="users-admin-toolbar">
+    <mat-icon>people</mat-icon>
+    <span class="toolbar-title">{{ t('admin.users.title') }}</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button 
+            (click)="refreshUsers()" 
+            [matTooltip]="t('common.refresh')"
+            [disabled]="loadingService.loading$ | async">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- Filters Card -->
+  <mat-card class="filters-card">
+    <mat-card-header>
+      <mat-card-title>{{ t('admin.users.filters') }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="filters-row">
+        <!-- Search Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ t('admin.users.search_placeholder') }}</mat-label>
+          <input matInput 
+                 [formControl]="searchFilter"
+                 [placeholder]="t('admin.users.search_placeholder')">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Role Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ t('admin.users.filter_by_role') }}</mat-label>
+          <mat-select [formControl]="roleFilter">
+            <mat-option value="all">{{ t('admin.users.all_roles') }}</mat-option>
+            <mat-option *ngFor="let role of allRoles" [value]="role.value">
+              {{ t('admin.users.role.' + role.value) }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Status Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ t('admin.users.filter_by_status') }}</mat-label>
+          <mat-select [formControl]="statusFilter">
+            <mat-option value="all">{{ t('admin.users.all_statuses') }}</mat-option>
+            <mat-option value="active">{{ t('admin.users.status.active') }}</mat-option>
+            <mat-option value="disabled">{{ t('admin.users.status.disabled') }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Clear Filters Button -->
+        <button mat-stroked-button 
+                (click)="clearFilters()"
+                class="clear-filters-btn">
+          <mat-icon>clear</mat-icon>
+          {{ t('admin.users.clear_filters') }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Users Table -->
+  <mat-card class="table-card">
+    <mat-card-content>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort class="users-table">
+          
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.id') }}</th>
+            <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.email') }}</th>
+            <td mat-cell *matCellDef="let user">
+              <div class="email-cell">
+                <span>{{ user.email }}</span>
+                <mat-icon *ngIf="user.isFromGoogle" 
+                          class="google-icon" 
+                          [matTooltip]="t('admin.users.google_account')">
+                  account_circle
+                </mat-icon>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Full Name Column -->
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.full_name') }}</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user.fullName || t('admin.users.no_name') }}
+            </td>
+          </ng-container>
+
+          <!-- Role Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.role') }}</th>
+            <td mat-cell *matCellDef="let user">
+              <mat-chip-set>
+                <mat-chip>
+                  {{ user.role ? user.role : 'user' }}
+                </mat-chip>
+              </mat-chip-set>
+            </td>
+          </ng-container>
+
+          <!-- Verified Column -->
+          <ng-container matColumnDef="isVerified">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.verified') }}</th>
+            <td mat-cell *matCellDef="let user">
+              <mat-icon [matTooltip]="user.isVerified ? t('admin.users.verified') : t('admin.users.unverified')">
+                {{ user.isVerified ? 'verified' : 'warning' }}
+              </mat-icon>
+            </td>
+          </ng-container>
+
+          <!-- Disabled Column -->
+          <ng-container matColumnDef="disabled">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.status') }}</th>
+            <td mat-cell *matCellDef="let user">
+              <mat-slide-toggle 
+                [checked]="!user.disabled"
+                (change)="toggleUserStatus(user.id!, user.disabled || false)"
+                [disabled]="!canEditUser(user)"
+                [matTooltip]="user.disabled ? t('admin.users.enable_user') : t('admin.users.disable_user')">
+              </mat-slide-toggle>
+            </td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="created">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.users.table.created') }}</th>
+            <td mat-cell *matCellDef="let user">
+              {{ user.created | dateformat }}
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ t('admin.users.table.actions') }}</th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-icon-button 
+                      [matMenuTriggerFor]="roleMenu"
+                      [disabled]="!canEditUser(user)"
+                      [matTooltip]="t('admin.users.change_role')">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              
+              <mat-menu #roleMenu="matMenu">
+                <button mat-menu-item 
+                        *ngFor="let role of getAvailableRolesForUser(user)"
+                        (click)="updateUserRole(user.id!, role.value)">
+                  <mat-icon>{{ role.value === 'admin' ? 'admin_panel_settings' : role.value === 'super_user' ? 'supervisor_account' : 'person' }}</mat-icon>
+                  <span>{{ t('admin.users.set_role_to') }} {{ t('admin.users.role.' + role.value) }}</span>
+                </button>
+                
+                <!-- Show message if no roles available -->
+                <div mat-menu-item *ngIf="getAvailableRolesForUser(user).length === 0" class="no-roles-message">
+                  <mat-icon>info</mat-icon>
+                  <span>{{ t('admin.users.no_roles_available') }}</span>
+                </div>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- No data row -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <div class="no-data-message">
+                {{ t('admin.users.no_users_found') }}
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Paginator -->
+      <mat-paginator 
+        [pageSizeOptions]="[10, 25, 50, 100]"
+        [pageSize]="25"
+        showFirstLastButtons>
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

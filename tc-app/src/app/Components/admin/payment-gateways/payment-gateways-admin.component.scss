@@ -1,0 +1,198 @@
+// Minimal styling - let Angular Material do the heavy lifting
+
+.payment-gateways-admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .payment-gateways-admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px; // Ensure consistent toolbar height
+
+    // Left side: icon + title
+    >span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .toolbar-title {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1;
+      }
+    }
+
+    // Right side: actions
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+    }
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .filters-card {
+    margin: 10px 0px 20px 0px;
+  }
+
+  // Filter row alignment
+  .filters-row {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    .filter-field {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .filter-actions {
+      display: flex;
+      align-items: baseline;
+
+      .clear-filters-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 1.34375em; // Match mat-form-field baseline offset
+      }
+    }
+  }
+
+  // Form row layout
+  .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .status-toggle {
+      margin-top: 16px;
+
+      @media (max-width: 768px) {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  // Status badges - minimal chip content alignment
+  .mat-mdc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 100px; // Make all badges same width
+    justify-content: center; // Center content in badges
+  }
+
+  // Table styling
+  .gateways-table {
+    width: 100%;
+
+    // Gateway Name column (2nd column) - fix text overlap
+    .gateway-name-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 150px;
+
+      strong {
+        font-weight: 500;
+        line-height: 1.2;
+        word-break: break-word; // Prevent long text from overflowing
+      }
+
+      .gateway-code {
+        font-size: 12px;
+        line-height: 1.2;
+        display: block; // Force to new line
+
+        .mat-mdc-chip {
+          min-width: 80px; // Specific width for gateway code badges
+        }
+
+      }
+    }
+
+    .mat-column-isActive {
+      .status-chip {
+        min-width: 120px; // Wider for icon + text
+        display: inline-block;
+
+        .status-icon {
+          margin: 0px 5px 0px 0px !important;
+          position: relative;
+          top: 3px;
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          line-height: 16px; // Align icon with text baseline
+        }
+        &.primary .status-icon { color: green; }
+        &.warn .status-icon { color: orange; }
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    padding: 10px;
+
+    .filters-row {
+      .filter-actions {
+        width: 100%;
+        margin-top: 16px;
+        justify-content: stretch;
+
+        .clear-filters-btn {
+          width: 100%;
+          margin-bottom: 0; // Remove baseline offset on mobile
+        }
+      }
+    }
+  }
+
+  // Table container styling
+  .table-container {
+    overflow-x: auto;
+
+    .gateways-table {
+      min-width: 800px; // Ensure table doesn't get too cramped
+    }
+  }
+
+  // No data state styling
+  .no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(0, 0, 0, 0.6);
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin: 16px 0;
+      font-size: 16px;
+    }
+  }
+}

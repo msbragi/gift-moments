@@ -1,0 +1,70 @@
+# Gift Moments Project - Git Ignore
+.github/
+Cleanup.md
+
+# Docker directory and all its contents
+Docker/
+#!Docker/docker-compose.yml
+#!Docker/.env.example
+#Docker/tc-be
+#!Docker/tc-be/Dockerfile
+#Docker/tc-fe
+#!Docker/tc-fe/Dockerfile
+#Docker/tc-db
+#!Docker/tc-db/mysql
+
+# Docker directory and all its contents
+docs/
+
+# Node.js
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+**/dist/
+**/build/
+
+# Angular specific
+**/.angular/
+**/coverage/
+**/.sass-cache/
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# IDE files
+.vscode/
+.idea/
+**/*.swp
+**/*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+**/logs/
+**/*.log
+
+# SQLite databases and data
+**/data/
+**/*.sqlite
+**/*.db
+!Docker/data/
+
+# Temporary files
+**/*.tmp
+**/*.temp
+
+# Compressed files
+**/*.gz
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.bak
+# Specific files to ignore (if any)
+# Add specific files here, not broad patterns like *.md

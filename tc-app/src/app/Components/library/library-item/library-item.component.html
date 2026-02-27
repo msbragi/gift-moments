@@ -1,0 +1,43 @@
+<div *transloco="let t" 
+     class="library-item-container"
+     [class.selectable]="selectable"
+     [class.compact]="compact"
+     (click)="onSelect()">
+  <mat-card class="library-item-card" [class.selected]="selected && selectable">
+    <div class="item-selection" *ngIf="selectable">
+      <mat-checkbox [checked]="selected" (click)="$event.stopPropagation()"></mat-checkbox>
+    </div>
+    
+    <div class="item-thumbnail">
+      <!-- Display thumbnail for images -->
+      <img *ngIf="item.contentType?.startsWith('image/') && item.url" 
+           [src]="item.url" 
+           alt="Image preview" />
+      
+      <!-- Use icon for non-image content -->
+      <div *ngIf="!(item.contentType?.startsWith('image/') && item.url)" class="item-icon">
+        <mat-icon>{{ getIcon() }}</mat-icon>
+      </div>
+    </div>
+
+    <mat-card-content>
+      <div class="item-details">
+        <div class="item-name">{{ item.name || t('unnamed_item') }}</div>
+        <div class="item-meta" *ngIf="!compact">
+          <span class="item-type">{{ item.contentType }}</span>
+          <span class="item-date" *ngIf="item.created">{{ item.created | dateformat }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+    
+    <div class="item-actions">
+      <button mat-icon-button aria-label="View" (click)="onView($event)">
+        <mat-icon>visibility</mat-icon>
+      </button>
+      
+      <button mat-icon-button aria-label="Delete" (click)="onDelete($event)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</div>

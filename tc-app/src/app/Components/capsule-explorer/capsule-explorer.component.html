@@ -1,0 +1,40 @@
+<div class="capsule-explorer-container" *transloco="let t; read: 'capsules'">
+    <div class="legend-overlay" *ngIf="showLegend" (click)="closeOnBackdropClick($event)">
+      <mat-card class="legend-modal">
+        <mat-card-header>
+          <button mat-icon-button class="close-button" (click)="toggleLegend()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <tc-capsule-legend></tc-capsule-legend>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <header class="explorer-header">
+        <h1>{{ t('explorer.title') || 'Explore Capsules' }}</h1>
+
+        <div class="explorer-controls">
+            <div class="toggle-controls" *ngIf="showToggle && viewMode === 'grid'">
+                <span class="toggle-label">{{ t('explorer.assigned') || 'My Capsules' }}</span>
+                <mat-slide-toggle [checked]="displayMode === 'public'" (change)="onToggleChange($event.checked)"
+                    color="primary">
+                </mat-slide-toggle>
+                <span class="toggle-label">{{ t('explorer.public') || 'Public Capsules' }}</span>
+            </div>
+            <button mat-icon-button (click)="toggleLegend()"
+                [title]="t('common.actions.legend')">
+                <mat-icon>help_outline</mat-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- Grid View -->
+    <tc-capsule-explorer-grid *ngIf="viewMode === 'grid'" [capsules]="displayedCapsules" [displayMode]="displayMode"
+        (capsuleClick)="onCapsuleClick($event)">
+    </tc-capsule-explorer-grid>
+
+    <!-- Single Capsule View -->
+    <tc-capsule-explorer-view *ngIf="viewMode === 'single'" [capsule]="selectedCapsule" (backToGrid)="onBackToGrid()">
+    </tc-capsule-explorer-view>
+</div>

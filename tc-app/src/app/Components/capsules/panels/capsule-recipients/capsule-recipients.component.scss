@@ -1,0 +1,176 @@
+.recipients {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    mat-divider {
+      height: 28px;
+      align-self: center;
+    }
+  }
+
+  &__content {
+    display: block;
+  }
+
+  &__empty {
+    padding: 16px 4px;
+    font-size: 14px;
+    opacity: .7;
+  }
+}
+
+/* CHIP GRID */
+.recipients-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.recipient-chip {
+  --chip-min-width: 210px;
+  --chip-horizontal-gap: 8px;
+
+  min-width: var(--chip-min-width);
+  padding: 2px 6px;
+  height: auto; /* allow vertical centering with multi-line */
+  box-sizing: border-box;
+  cursor: pointer;
+
+  .mdc-evolution-chip__action,
+  .mat-mdc-chip-action {
+    width: 100%;
+  }
+}
+
+.recipient-chip__main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--chip-horizontal-gap);
+  line-height: 1.25;
+}
+
+.recipient-chip__status {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.recipient-chip__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0; /* allow truncation if needed */
+}
+
+.recipient-chip__label {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.15;
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipient-chip__sub {
+  font-size: 11px;
+  opacity: .7;
+  line-height: 1.1;
+  white-space: nowrap;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipient-chip__spacer {
+  flex: 1 1 auto;
+  min-width: 4px;
+}
+
+.recipient-chip__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recipient-chip__btn {
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  padding: 0;
+}
+
+/* TABLE: row dividers instead of cell borders */
+.recipients-table {
+  table {
+    border-collapse: separate; /* keep spacing logic */
+  }
+
+  .mat-mdc-header-row {
+    position: relative;
+  }
+
+  .mat-mdc-header-row::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(0,0,0,0.12);
+  }
+
+  .mat-mdc-row {
+    position: relative;
+  }
+
+  .mat-mdc-row::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(0,0,0,0.12);
+    pointer-events: none;
+  }
+
+  /* Optional: remove any individual cell borders if you had added them elsewhere */
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    border: 0;
+  }
+
+  /* Compact spacing still respected */
+  .mat-mdc-header-row,
+  .mat-mdc-row {
+    height: 48px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .recipient-chip {
+    --chip-min-width: 160px;
+  }
+  .recipient-chip__label,
+  .recipient-chip__sub {
+    max-width: 100px;
+  }
+}

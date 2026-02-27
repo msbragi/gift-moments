@@ -1,0 +1,29 @@
+.library-container {
+    width: 800px;
+    margin: auto;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .header-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .library-container {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+    }
+
+    .library-header {
+        flex-direction: column;
+    }
+}

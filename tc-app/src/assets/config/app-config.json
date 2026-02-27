@@ -1,0 +1,167 @@
+{
+  "apiUrl": "http://localhost:3000/api/v1",
+  "logMode": "console",
+  "siteMode": "development",
+  "version": "1.0.3",
+  "langs": [
+    {
+      "code": "en",
+      "label": "ENG",
+      "description": "English"
+    },
+    {
+      "code": "it",
+      "label": "ITA",
+      "description": "Italiano"
+    },
+    {
+      "code": "fr",
+      "label": "FRA",
+      "description": "Français"
+    },
+    {
+      "code": "es",
+      "label": "ESP",
+      "description": "Español"
+    },
+    {
+      "code": "ka",
+      "label": "GEO",
+      "description": "ქართული"
+    },
+    {
+      "code": "ru",
+      "label": "RUS",
+      "description": "Русский"
+    }
+  ],
+  "google": {
+    "clientId": "439716006061-ltj6cp98tlk821oh0qg51bn0lvltlm50.apps.googleusercontent.com",
+    "redirectUri": "http://localhost:4200",
+    "button": {
+      "theme": "outline",
+      "size": "large",
+      "text": "continue_with",
+      "logo_alignment": "left"
+    },
+    "analyticsId": "G-SSQ5E4CVF8"
+  },
+  "uploadConfig": {
+    "maxFileSize": 50,
+    "maxFileCount": 5,
+    "acceptedFileTypes": "*/*",
+    "allowMultiple": false
+  },
+  "externalProviders": [
+    {
+      "name": "YouTube",
+      "domains": [
+        "youtube.com",
+        "youtu.be"
+      ],
+      "icon": "./assets/img/icons/youtube.svg",
+      "fallbackIcon": "play_circle",
+      "supportsMetadata": true,
+      "embedSupport": true
+    },
+    {
+      "name": "Vimeo",
+      "domains": [
+        "vimeo.com"
+      ],
+      "icon": "./assets/img/icons/vimeo.svg",
+      "fallbackIcon": "movie",
+      "supportsMetadata": true,
+      "embedSupport": true
+    },
+    {
+      "name": "GoogleDrive",
+      "domains": [
+        "drive.google.com"
+      ],
+      "icon": "./assets/img/icons/google-drive.svg",
+      "fallbackIcon": "cloud_upload",
+      "supportsMetadata": true,
+      "embedSupport": true
+    },
+    {
+      "name": "GoogleDocs",
+      "domains": [
+        "docs.google.com"
+      ],
+      "icon": "./assets/img/icons/google-docs.svg",
+      "fallbackIcon": "description",
+      "supportsMetadata": true,
+      "embedSupport": true
+    }
+  ],
+  "menus": {
+    "guest": [
+      {
+        "label": "Home",
+        "icon": "home",
+        "route": "/"
+      },
+      {
+        "label": "Login",
+        "icon": "login",
+        "route": "/login"
+      }
+    ],
+    "user": [
+      {
+        "label": "Home",
+        "icon": "home",
+        "route": "/"
+      },
+      {
+        "label": "Dashboard",
+        "icon": "dashboard",
+        "route": "/dashboard"
+      },
+      {
+        "label": "My Capsules",
+        "icon": "inventory_2",
+        "route": "/capsules"
+      },
+      {
+        "label": "My Library",
+        "icon": "library_books",
+        "route": "/library"
+      },
+      {
+        "label": "My Profile",
+        "icon": "person",
+        "route": "/profile"
+      },
+      {
+        "label": "My Subscription",
+        "icon": "workspace_premium",
+        "route": "/subscription"
+      }
+    ],
+    "admin": [
+      {
+        "label": "_DIVIDER_"
+      },
+      {
+        "label": "Statistics",
+        "icon": "analytics",
+        "route": "/admin/stats"
+      },
+      {
+        "label": "Manage Users",
+        "icon": "people",
+        "route": "/admin/users"
+      },
+      {
+        "label": "_DIVIDER_"
+      },
+      {
+        "label": "Payment Gateways",
+        "icon": "payment",
+        "route": "/admin/payment-gateways"
+      }
+    ]
+  }
+}

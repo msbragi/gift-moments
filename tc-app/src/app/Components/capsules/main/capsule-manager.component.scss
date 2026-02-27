@@ -1,0 +1,159 @@
+/**
+ * Capsule manager component layout
+ * Implements responsive, flexible layout following Material Design guidelines
+ */
+.capsule-main-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  // Toolbar responsive styling
+  .list-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 8px 16px;
+    min-height: 64px;
+
+    h2 {
+      margin: 0;
+      flex: 1 1 auto;
+      min-width: 0; // Allow title to shrink if needed
+    }
+
+    .storage-metric {
+      display: flex;
+      align-items: center;
+      
+      mat-chip {
+        white-space: nowrap;
+        
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    // Mobile responsive layout
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+
+      h2 {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+
+      // Create a row for metrics and actions
+      .storage-metrics-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .storage-metric {
+        flex: 1;
+        min-width: 0;
+        
+        mat-chip {
+          width: 100%;
+          justify-content: center;
+          
+          // Hide text on very small screens, keep only icons
+          @media (max-width: 480px) {
+            .chip-text {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .header-actions {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    // Extra small screens
+    @media (max-width: 480px) {
+      padding: 8px;
+      gap: 8px;
+
+      .storage-metric {
+        mat-chip {
+          font-size: 12px;
+          padding: 4px 8px;
+        }
+      }
+    }
+  }
+
+  .content-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 16px 0px;
+    
+    tc-capsule-form {
+      flex: 1;
+      display: flex;
+    }
+  }
+
+  // Legend overlay styling
+  .legend-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .legend-modal {
+      position: relative;
+      border-radius: 8px;
+      padding: 16px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+
+      .close-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+    }
+  }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+  .capsule-main-container {
+    .legend-overlay {
+      .legend-modal {
+        width: 95%;
+        max-width: none;
+        max-height: 95vh;
+      }
+    }
+  }
+}

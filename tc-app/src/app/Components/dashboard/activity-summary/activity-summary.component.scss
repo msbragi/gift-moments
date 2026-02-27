@@ -1,0 +1,58 @@
+.activity-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-header {
+  padding: 16px;
+  
+  h3 {
+    margin: 0;
+  }
+}
+
+.activities-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.activity-time {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+// Icon color classes using Material color variables
+.activity-icon-capsule-created {
+  color: var(--mat-primary-color);
+}
+
+.activity-icon-capsule-opened {
+  color: var(--mat-accent-color);
+}
+
+.activity-icon-recipient-added {
+  color: var(--mat-warn-color);
+}
+
+.no-activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  opacity: 0.6;
+  
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    text-align: center;
+    margin: 0;
+  }
+}

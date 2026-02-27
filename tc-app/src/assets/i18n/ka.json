@@ -1,0 +1,197 @@
+{
+  "atranslation-hint": "ეს გვერდი ხელმისაწვდომია მხოლოდ ინგლისურ ენაზე. გამოიყენეთ თქვენი ბრაუზერის თარგმნის ფუნქცია სხვა ენებისთვის.",
+  "capsule_items": {
+    "grid_view": "TRANSLATE ME",
+    "list_view": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "select_capsule": "TRANSLATE ME",
+    "upload": "TRANSLATE ME"
+  },
+  "capsules": {
+    "basic_info": "TRANSLATE ME",
+    "capsule": {
+      "items": "TRANSLATE ME",
+      "name": "TRANSLATE ME",
+      "no_description": "TRANSLATE ME",
+      "opens": "TRANSLATE ME",
+      "status": {
+        "status": "TRANSLATE ME"
+      }
+    },
+    "description": "TRANSLATE ME",
+    "description_placeholder": "TRANSLATE ME",
+    "is_physical": "TRANSLATE ME",
+    "is_physical_description": "TRANSLATE ME",
+    "is_public": "TRANSLATE ME",
+    "is_public_description": "TRANSLATE ME",
+    "latitude": "TRANSLATE ME",
+    "legend": {
+      "help": "TRANSLATE ME",
+      "subtitle": "TRANSLATE ME",
+      "title": "TRANSLATE ME"
+    },
+    "location": "TRANSLATE ME",
+    "longitude": "TRANSLATE ME",
+    "map_coming_soon": "TRANSLATE ME",
+    "name": "TRANSLATE ME",
+    "name_placeholder": "TRANSLATE ME",
+    "open_date": "TRANSLATE ME",
+    "options": "TRANSLATE ME",
+    "panels": {
+      "capsules": {
+        "empty": "TRANSLATE ME",
+        "new": "TRANSLATE ME",
+        "title": "TRANSLATE ME"
+      },
+      "contents": {
+        "title": "TRANSLATE ME"
+      },
+      "library": {
+        "title": "TRANSLATE ME"
+      },
+      "recipients": {
+        "title": "TRANSLATE ME"
+      }
+    }
+  },
+  "common": {
+    "actions": {
+      "cancel": "TRANSLATE ME",
+      "create": "TRANSLATE ME",
+      "update": "TRANSLATE ME"
+    },
+    "delete": "TRANSLATE ME",
+    "validation": {
+      "max_length": "TRANSLATE ME",
+      "required": "TRANSLATE ME"
+    },
+    "view": "TRANSLATE ME"
+  },
+  "dashboard": {
+    "charts": {
+      "select_metric": "TRANSLATE ME",
+      "select_type": "TRANSLATE ME"
+    },
+    "common": {
+      "loading": "TRANSLATE ME"
+    },
+    "global": {
+      "registeredUsers": "TRANSLATE ME",
+      "statistics": "TRANSLATE ME"
+    },
+    "user": {
+      "statistics": "TRANSLATE ME"
+    }
+  },
+  "emailVerification": {
+    "accountVerified": "თქვენი ანგარიში წარმატებით დადასტურდა. ახლა შეგიძლიათ შეხვიდეთ Gift Moment-ში.",
+    "backToLogin": "შესვლის გვერდზე დაბრუნება",
+    "checkEmail": "შეამოწმეთ თქვენი ელფოსტა",
+    "checkSpam": "თუ ვერ ხედავთ ელფოსტას, გთხოვთ შეამოწმოთ სპამის საქაღალდე.",
+    "linkExpired": "დამადასტურებელი ბმული ვადაგასულია. გთხოვთ, მოითხოვოთ ახალი.",
+    "proceedToLogin": "შესვლაზე გადასვლა",
+    "resendVerification": "დამადასტურებელი ელფოსტის ხელახლა გაგზავნა",
+    "verificationFailed": "დადასტურება ვერ მოხერხდა",
+    "verificationSent": "თქვენს ელფოსტაზე გამოვაგზავნეთ დამადასტურებელი ბმული. გთხოვთ, დააჭიროთ ბმულს ანგარიშის გასააქტიურებლად.",
+    "verificationSuccess": "ელფოსტა დადასტურებულია!",
+    "verifying": "ელფოსტის მისამართის დადასტურება..."
+  },
+  "forgotPassword": {
+    "backToLogin": "დაბრუნება შესვლაზე",
+    "cancel": "გაუქმება",
+    "checkEmail": "შეამოწმეთ თქვენი ელ.ფოსტა",
+    "emailInvalid": "გთხოვთ, შეიყვანოთ სწორი ელ.ფოსტა",
+    "emailLabel": "ელ.ფოსტა",
+    "emailPlaceholder": "შეიყვანეთ თქვენი ელ.ფოსტა",
+    "emailRequired": "ელ.ფოსტა აუცილებელია",
+    "enterEmail": "შეიყვანეთ თქვენი ელ.ფოსტის მისამართი და ჩვენ გამოგიგზავნით ბმულს პაროლის გადასაყენებლად.",
+    "resetLinkSent": "ჩვენ გამოგიგზავნეთ პაროლის გადატვირთვის ბმული თქვენს ელ.ფოსტაზე. გთხოვთ, შეამოწმოთ თქვენი შემოსულები და მიჰყვეთ ინსტრუქციებს.",
+    "resetPassword": "პაროლის აღდგენა",
+    "sendResetLink": "გადატვირთვის ბმულის გაგზავნა",
+    "sending": "იგზავნება..."
+  },
+  "library": {
+    "common": {
+      "tooltips": {
+        "delete": "TRANSLATE ME",
+        "view": "TRANSLATE ME"
+      }
+    },
+    "empty": "TRANSLATE ME",
+    "filters": {
+      "all": "TRANSLATE ME"
+    },
+    "loading": "TRANSLATE ME",
+    "no_items": "TRANSLATE ME",
+    "search": "TRANSLATE ME",
+    "title": "TRANSLATE ME",
+    "unnamed_item": "TRANSLATE ME",
+    "upload": "TRANSLATE ME",
+    "upload_files": "TRANSLATE ME"
+  },
+  "login": {
+    "Welcome": "კეთილი იყოს თქვენი მობრძანება Gift Moment-ში",
+    "emailError": "თქვენი ელფოსტა არასწორია",
+    "emailInput": "შეიყვანეთ თქვენი ელფოსტა",
+    "emailLabel": "ელფოსტა",
+    "forgotPwdButton": "დაგავიწყდათ პაროლი?",
+    "googleButton": "Google-ით შესვლა",
+    "loginButton": "შესვლა",
+    "passwordError": "თქვენი პაროლი არასწორია",
+    "passwordInput": "შეიყვანეთ თქვენი პაროლი",
+    "passwordLabel": "პაროლი",
+    "passwordPlaceholder": "TRANSLATE ME",
+    "passwordRequired": "TRANSLATE ME",
+    "registerButton": "რეგისტრაცია"
+  },
+  "recipients": {
+    "add": "TRANSLATE ME",
+    "empty": "TRANSLATE ME",
+    "title": "TRANSLATE ME"
+  },
+  "register": {
+    "alreadyHaveAccount": "უკვე გაქვთ ანგარიში?",
+    "confirmPasswordLabel": "დაადასტურეთ პაროლი",
+    "confirmPasswordPlaceholder": "დაადასტურეთ თქვენი პაროლი",
+    "confirmPasswordRequired": "გთხოვთ დაადასტუროთ თქვენი პაროლი",
+    "createAccount": "ანგარიშის შექმნა",
+    "emailInvalid": "გთხოვთ შეიყვანოთ მოქმედი ელფოსტა",
+    "emailLabel": "ელფოსტა",
+    "emailPlaceholder": "შეიყვანეთ თქვენი ელფოსტა",
+    "emailRequired": "ელფოსტა აუცილებელია",
+    "fullNameInvalid": "TRANSLATE ME",
+    "fullNameLabel": "სახელი",
+    "fullNamePlaceholder": "ჩაწერეთ თქვენი სრული სახელი",
+    "fullNameRequired": "სახელი აუცილებელია",
+    "loginLink": "შესვლა",
+    "passwordLabel": "პაროლი",
+    "passwordMinLength": "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+    "passwordPlaceholder": "შექმენით პაროლი",
+    "passwordRequired": "პაროლი აუცილებელია",
+    "passwordsDoNotMatch": "პაროლები არ ემთხვევა",
+    "registerButton": "ანგარიშის შექმნა",
+    "termsCheckbox": "ვეთანხმები",
+    "termsLink": "მომსახურების პირობებს",
+    "termsRequired": "რეგისტრაციისთვის უნდა დაეთანხმოთ პირობებს"
+  },
+  "resetPassword": {
+    "backToLogin": "დაბრუნება შესვლაზე",
+    "canNowLogin": "თქვენი პაროლი წარმატებით გადაყენებულია. ახლა შეგიძლიათ შეხვიდეთ თქვენი ახალი პაროლით.",
+    "confirmPassword": "პაროლის დადასტურება",
+    "confirmPasswordPlaceholder": "დაადასტურეთ თქვენი ახალი პაროლი",
+    "confirmPasswordRequired": "გთხოვთ, დაადასტუროთ თქვენი პაროლი",
+    "enterNewPassword": "გთხოვთ, ქვემოთ შეიყვანოთ თქვენი ახალი პაროლი.",
+    "newPassword": "ახალი პაროლი",
+    "passwordMinLength": "პაროლი უნდა იყოს მინიმუმ 8 სიმბოლოს სიგრძის",
+    "passwordPlaceholder": "შეიყვანეთ ახალი პაროლი",
+    "passwordRequired": "პაროლი აუცილებელია",
+    "passwordResetSuccess": "პაროლის აღდგენა წარმატებით დასრულდა",
+    "passwordsDoNotMatch": "პაროლები არ ემთხვევა",
+    "requestNewLink": "ახალი ბმულის მოთხოვნა",
+    "resetPassword": "პაროლის აღდგენა",
+    "resetYourPassword": "პაროლის აღდგენა",
+    "resetting": "გადაყენება...",
+    "tokenInvalid": "პაროლის გადაყენების ბმული არასწორია ან ვადაგასულია"
+  },
+  "unnamed_item": "TRANSLATE ME"
+}

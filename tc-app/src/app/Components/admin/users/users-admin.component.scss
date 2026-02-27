@@ -1,0 +1,135 @@
+.users-admin-container {
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.users-admin-toolbar {
+  margin-bottom: 16px;
+
+  .toolbar-title {
+    margin-left: 12px;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.filters-card {
+  margin-bottom: 16px;
+
+  .filters-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    .filter-field {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .clear-filters-btn {
+      white-space: nowrap;
+      margin-bottom: 1.34375em; // Align with Material form field baseline
+    }
+  }
+}
+
+.table-card {
+  .table-container {
+    overflow: auto;
+    max-height: 70vh;
+  }
+
+  .users-table {
+    width: 100%;
+    
+    .mat-column-id {
+      max-width: 80px;
+    }
+
+    .mat-column-email {
+      min-width: 200px;
+    }
+
+    .mat-column-fullName {
+      min-width: 150px;
+    }
+
+    .mat-column-role {
+      min-width: 120px;
+    }
+
+    .mat-column-isVerified,
+    .mat-column-disabled {
+      max-width: 100px;
+      text-align: center;
+    }
+
+    .mat-column-created {
+      min-width: 130px;
+    }
+
+    .mat-column-actions {
+      max-width: 80px;
+      text-align: center;
+    }
+  }
+}
+
+// Email cell styling
+.email-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// No data message - let Material theme handle colors
+.no-data-message {
+  text-align: center;
+  padding: 24px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .users-admin-container {
+    padding: 8px;
+  }
+
+  .filters-row {
+    flex-direction: column;
+    gap: 12px;
+
+    .filter-field {
+      min-width: unset;
+    }
+  }
+
+  .table-container {
+    max-height: 60vh;
+  }
+
+  // Hide less important columns on mobile
+  .mat-column-id,
+  .mat-column-created {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  // Hide even more columns on very small screens
+  .mat-column-fullName,
+  .mat-column-isVerified {
+    display: none;
+  }
+}
+
+// Security and privilege styling - minimal overrides
+.no-roles-message {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

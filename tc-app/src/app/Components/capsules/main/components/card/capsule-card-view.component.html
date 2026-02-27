@@ -1,0 +1,64 @@
+<div *transloco="let t" class="card-grid">
+  <mat-card *ngIf="capsules.length === 0" class="empty-state" appearance="outlined">
+    {{ t('capsule.panels.capsule.empty') }}
+    <a mat-button routerLink="/subscription-plans">{{ t('capsule.panels.capsule.get_capsule') }}</a>
+  </mat-card>
+
+  <mat-card *ngFor="let capsule of capsules" class="capsule-card" appearance="outlined"
+    [class.selected]="isSelected(capsule)">
+    <mat-chip class="plan-icon" [matTooltip]="(capsule.plan?.name | titlecase) + ' plan - ' + t('subscription.totalRemainingLibrary') + ': ' + calcStorage(capsule) + ' MB'">
+      <mat-icon>{{ getPlanIcon(capsule) }}</mat-icon>
+      <span class="info">
+        {{ calcStorage(capsule) }} MB
+      </span>
+    </mat-chip>
+
+    <mat-card-header>
+      <div class="status-icons">
+        <mat-icon *ngIf="!capsule.isPublic">lock</mat-icon>
+        <mat-icon *ngIf="capsule.isPublic">public</mat-icon>
+        <mat-icon *ngIf="capsule.isOpen">visibility</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && isDateInPast(capsule.openDate)">lock_open</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && !isDateInPast(capsule.openDate)">lock_clock</mat-icon>
+        <mat-icon *ngIf="!capsule.isPhysical">cloud</mat-icon>
+        <mat-icon *ngIf="capsule.isPhysical">place</mat-icon>
+      </div>
+
+      <div class="spacer"></div>
+
+      <tc-capsule-actions *ngIf="showActions" 
+      [capsuleId]="capsule.id || 0" 
+      (action)="onAction($event, capsule)">
+      </tc-capsule-actions>
+    </mat-card-header>
+
+    <mat-card-content class="capsule-content" (click)="selectCapsule(capsule)">
+      <mat-card-title>{{ capsule.name }}</mat-card-title>
+      <mat-card-subtitle>{{ capsule.description || t('capsule.no_description') }}</mat-card-subtitle>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="metadata-info">
+        <span class="metadata-item">
+          <mat-icon>{{ UI_CONSTANTS.metadata.creationDate.icon }}</mat-icon>
+          {{ capsule.created | dateformat }}
+        </span>
+        <span class="metadata-item" *ngIf="capsule.openDate">
+          <mat-icon>{{ UI_CONSTANTS.metadata.openDate.icon }}</mat-icon>
+          {{ capsule.openDate | dateformat }}
+        </span>
+      </div>
+
+      <div class="metadata-info">
+        <span class="metadata-item">
+          <mat-icon>{{ UI_CONSTANTS.metadata.items.icon }}</mat-icon>
+          {{ capsule.usage?.items_per_capsule }} / {{ capsule.plan?.limits?.items_per_capsule }}
+        </span>
+        <span class="metadata-item">
+          <mat-icon>{{ UI_CONSTANTS.metadata.recipients.icon }}</mat-icon>
+          {{ capsule.usage?.recipients_per_capsule }} / {{ capsule.plan?.limits?.recipients_per_capsule }}
+        </span>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

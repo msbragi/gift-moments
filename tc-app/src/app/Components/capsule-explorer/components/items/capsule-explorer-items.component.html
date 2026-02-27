@@ -1,0 +1,48 @@
+<div *transloco="let t" class="items-container">
+  <div class="items-header">
+    <h3>{{ t('explorer.view.digital_content') }}</h3>
+    <span class="items-count">
+      {{ items.length > 0 ? items.length : getItemsCount() }} {{ t('explorer.view.items') }}
+    </span>
+  </div>
+
+  <div *ngIf="items.length > 0" class="item-grid">
+    <mat-card  (click)="viewContent(item)" *ngFor="let item of items" class="item-card" appearance="outlined">
+      <mat-card-header class="icon-header">
+        <mat-icon mat-card-avatar>{{ getIcon(item) }}</mat-icon>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="item-title">{{ item.name || t('library.unnamed_item') }}</p>
+        <p class="item-date">{{ item.created | dateformat }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="items.length === 0 && isTimeLocked() && getItemsCount() > 0" class="time-locked-container">
+    <!-- Fake items grid underneath -->
+    <div class="fake-items-grid">
+      <div class="fake-item" *ngFor="let fakeItem of getFakeItems()">
+        <div class="fake-item-icon" [innerHTML]="fakeItem.svg"></div>
+        <div class="fake-item-title">{{ fakeItem.title }}</div>
+        <div class="fake-item-date">{{ fakeItem.date }}</div>
+      </div>
+    </div>
+    
+    <!-- Blurred overlay with message -->
+    <div class="time-locked-overlay">
+      <div class="time-locked-message">
+        <mat-icon>lock_clock</mat-icon>
+        <h4>{{ t('explorer.view.digital_time_locked_title') || "Secret treasures await!" }}</h4>
+        <p>{{ t('explorer.view.digital_time_locked_message') || "This capsule contains" }} 
+           <strong>{{ getItemsCount() }}</strong> 
+           {{ t('explorer.view.digital_time_locked_items') || "fantastic messages for you" }}
+        </p>
+        <p>{{ t('explorer.view.digital_time_locked_date') || "but you can see them only after" }} 
+           <strong>{{ getFormattedOpenDate() }}</strong>
+        </p>
+        <p class="hint">{{ t('explorer.view.digital_time_locked_hint') || "Patience... the best things are worth waiting for!" }}</p>
+      </div>
+    </div>
+  </div>
+</div>

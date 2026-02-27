@@ -1,0 +1,13 @@
+[
+  {
+    "name": "default",
+    "type": "mysql",
+    "host": "host.docker.internal",
+    "port": 3306,
+    "username": "joomla",
+    "password": "joomla",
+    "database": "",
+    "synchronize": false,
+    "entities": ["entities/*.js"]
+  }
+]

@@ -1,0 +1,246 @@
+<div class="payment-gateways-admin-container" *transloco="let t">
+  <!-- Toolbar -->
+  <mat-toolbar class="payment-gateways-admin-toolbar">
+    <span>
+      <mat-icon>payment</mat-icon>
+      <span class="toolbar-title">{{ t('admin.paymentGateways.title') }}</span>
+    </span>
+    <span class="spacer"></span>
+    <div class="toolbar-actions">
+      <button mat-raised-button class="primary add-button" (click)="startCreate()"
+        [disabled]="loadingService.loading$ | async">
+        <mat-icon>add</mat-icon>
+        <span>{{ t('admin.paymentGateways.addGateway') }}</span>
+      </button>
+      <button mat-icon-button (click)="refreshGateways()" [matTooltip]="t('common.actions.refresh')"
+        [disabled]="loadingService.loading$ | async">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- Create/Edit Form -->
+  <mat-card *ngIf="isEditing" class="form-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{ editingGateway ? t('admin.paymentGateways.editGateway') : t('admin.paymentGateways.createGateway') }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="gatewayForm" class="gateway-form">
+        <div class="form-row">
+          <!-- Gateway Code -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.gatewayCode') }}</mat-label>
+            <mat-select formControlName="gatewayCode" [disabled]="!!editingGateway">
+              <mat-option *ngFor="let code of availableGatewayCodes" [value]="code.value">
+                {{ code.label }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="gatewayForm.get('gatewayCode')?.hasError('required')">
+              {{ t('admin.paymentGateways.gatewayCodeRequired') }}
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Gateway Name -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.gatewayName') }}</mat-label>
+            <input matInput formControlName="gatewayName"
+              [placeholder]="t('admin.paymentGateways.gatewayNamePlaceholder')">
+            <mat-error *ngIf="gatewayForm.get('gatewayName')?.hasError('required')">
+              {{ t('admin.paymentGateways.gatewayNameRequired') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <!-- Active Status -->
+          <mat-slide-toggle formControlName="isActive" class="status-toggle">
+            {{ t('admin.paymentGateways.isActive') }}
+          </mat-slide-toggle>
+        </div>
+
+        <div class="form-row">
+          <!-- API Key Public -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.apiKeyPublic') }}</mat-label>
+            <input matInput formControlName="apiKeyPublic"
+              [placeholder]="t('admin.paymentGateways.apiKeyPublicPlaceholder')">
+          </mat-form-field>
+
+          <!-- API Key Secret -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.apiKeySecret') }}</mat-label>
+            <input matInput type="password" formControlName="apiKeySecret"
+              [placeholder]="t('admin.paymentGateways.apiKeySecretPlaceholder')">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <!-- Webhook Secret -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.webhookSecret') }}</mat-label>
+            <input matInput type="password" formControlName="webhookSecret"
+              [placeholder]="t('admin.paymentGateways.webhookSecretPlaceholder')">
+          </mat-form-field>
+
+          <!-- Webhook URL -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>{{ t('admin.paymentGateways.webhookUrl') }}</mat-label>
+            <input matInput formControlName="webhookUrl"
+              [placeholder]="t('admin.paymentGateways.webhookUrlPlaceholder')">
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="cancelEdit()">
+        {{ t('common.actions.cancel') }}
+      </button>
+      <button mat-raised-button class="primary" (click)="saveGateway()"
+        [disabled]="gatewayForm.invalid || (loadingService.loading$ | async)">
+        {{ editingGateway ? t('common.actions.update') : t('common.actions.create') }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Filters Card -->
+  <ng-container *ngIf="!isEditing">
+    <mat-card class="filters-card">
+      <mat-card-header>
+        <mat-card-title>{{ t('admin.paymentGateways.filters') }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="filters-row">
+          <!-- Search Filter -->
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>{{ t('admin.paymentGateways.search_placeholder') }}</mat-label>
+            <input matInput [formControl]="searchFilter" [placeholder]="t('admin.paymentGateways.search_placeholder')">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <!-- Status Filter -->
+          <mat-form-field appearance="outline" class="filter-field">
+            <mat-label>{{ t('admin.paymentGateways.filter_by_status') }}</mat-label>
+            <mat-select [formControl]="statusFilter">
+              <mat-option value="all">{{ t('admin.paymentGateways.all_statuses') }}</mat-option>
+              <mat-option *ngFor="let status of allStatuses" [value]="status.value">
+                {{ t('admin.paymentGateways.status.' + status.value) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Clear Filters Button -->
+          <div class="filter-actions">
+            <button mat-stroked-button (click)="clearFilters()" class="clear-filters-btn">
+              <mat-icon>clear</mat-icon>
+              <span>{{ t('admin.paymentGateways.clear_filters') }}</span>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Gateways Table -->
+    <mat-card class="table-card">
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource" matSort class="gateways-table">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.paymentGateways.table.id') }}</th>
+              <td mat-cell *matCellDef="let gateway">{{ gateway.id }}</td>
+            </ng-container>
+
+            <!-- Gateway Name Column -->
+            <ng-container matColumnDef="gatewayName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.paymentGateways.table.gatewayName') }}
+              </th>
+              <td mat-cell *matCellDef="let gateway">
+                <div class="gateway-name-cell">
+                  <strong>{{ gateway.gatewayName }}</strong>
+                  <small class="gateway-code">{{ gateway.gatewayCode }}</small>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Gateway Code Column -->
+            <ng-container matColumnDef="gatewayCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.paymentGateways.table.gatewayCode') }}
+              </th>
+              <td mat-cell *matCellDef="let gateway">
+                <mat-chip [class]="gateway.gatewayCode === 'stripe' ? 'primary' : 'accent'">
+                  {{ gateway.gatewayCode }}
+                </mat-chip>
+              </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="isActive">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.paymentGateways.table.status') }}</th>
+              <td mat-cell *matCellDef="let gateway">
+                <mat-chip class="status-chip" [ngClass]="gateway.isActive ? 'primary' : 'warn'">
+                  <mat-icon class="status-icon">{{ gateway.isActive ? 'check_circle' : 'cancel' }}</mat-icon>
+                  <span>{{ t('admin.paymentGateways.status.' + (gateway.isActive ? 'active' : 'inactive')) }}</span>
+                </mat-chip>
+              </td>
+            </ng-container>
+
+            <!-- Created Column -->
+            <ng-container matColumnDef="created">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ t('admin.paymentGateways.table.created') }}</th>
+              <td mat-cell *matCellDef="let gateway">{{ gateway.created | dateformat:true }}</td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>{{ t('admin.paymentGateways.table.actions') }}</th>
+              <td mat-cell *matCellDef="let gateway">
+                <button mat-icon-button [matMenuTriggerFor]="actionsMenu" [matTooltip]="t('common.actions')">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #actionsMenu="matMenu">
+                  <button mat-menu-item (click)="startEdit(gateway)">
+                    <mat-icon>edit</mat-icon>
+                    <span>{{ t('common.actions.edit') }}</span>
+                  </button>
+
+                  <button mat-menu-item (click)="toggleGatewayStatus(gateway)">
+                    <mat-icon>{{ gateway.isActive ? 'toggle_off' : 'toggle_on' }}</mat-icon>
+                    <span>{{ gateway.isActive ? t('admin.paymentGateways.disable') : t('admin.paymentGateways.enable')
+                      }}</span>
+                  </button>
+
+                  <mat-divider></mat-divider>
+
+                  <button mat-menu-item (click)="deleteGateway(gateway)" class="delete-action">
+                    <mat-icon>delete</mat-icon>
+                    <span>{{ t('common.actions.delete') }}</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+        <!-- No Data Message -->
+        <div *ngIf="dataSource.data.length === 0" class="no-data">
+          <mat-icon>payment</mat-icon>
+          <p>{{ t('admin.paymentGateways.noGateways') }}</p>
+          <button mat-raised-button color="primary" (click)="startCreate()">
+            {{ t('admin.paymentGateways.addFirstGateway') }}
+          </button>
+        </div>
+
+        <!-- Paginator -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" [showFirstLastButtons]="true" class="table-paginator">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

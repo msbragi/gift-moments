@@ -1,0 +1,41 @@
+<div *transloco="let t; read: 'external-link'">
+    <h2 mat-dialog-title class="dialog-header">
+        <div class="header-content">
+            <mat-icon>link</mat-icon>
+            {{ data.title || t('title') }}
+        </div>
+        <div class="provider-icons" *ngIf="currentProvider">
+            <div class="provider-icon" [ngClass]="currentProvider.name.toLocaleLowerCase()"
+                [style.background-image]="'url(' + currentProvider.icon + ')'">
+            </div>
+        </div>
+    </h2>
+
+    <mat-dialog-content>
+        <!-- Supported Providers Info -->
+        <tc-external-provider-list [providers]="getSupportedProviders()" [currentProvider]="currentProvider"
+            [readonly]="data.readonly || false">
+        </tc-external-provider-list>
+
+        <!-- URL Input and Validation (only in edit mode) -->
+        <tc-external-url-input *ngIf="!data.readonly" [initialUrl]="data.initialUrl"
+            [placeholder]="data.placeholder" [validationState]="validationState" (urlChange)="onUrlChange($event)"
+            (validateUrl)="validateUrl($event)">
+        </tc-external-url-input>
+
+        <!-- Content Preview -->
+        <tc-external-content-preview
+            *ngIf="data.showPreview && remoteContent && currentProvider && currentUrl && (validationState.isValid || data.readonly)"
+            [remoteContent]="remoteContent" [provider]="currentProvider" [url]="currentUrl">
+        </tc-external-content-preview>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+            <button type="button" mat-button (click)="onCancel()">
+                {{ data.readonly ? t('close') : t('cancel') }}
+            </button>        <button *ngIf="!data.readonly" type="button" mat-raised-button color="primary" [disabled]="!canSubmit()" 
+            (click)="onSubmit()">
+            {{ t('add-link') }}
+        </button>
+    </mat-dialog-actions>
+</div>

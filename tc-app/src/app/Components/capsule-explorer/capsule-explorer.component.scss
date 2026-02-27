@@ -1,0 +1,114 @@
+.capsule-explorer-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 75vh; // Ensure minimum height for content
+}
+
+// Legend overlay styling
+.legend-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // Use rgba for backdrop to avoid opacity inheritance issues
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .legend-modal {
+    position: relative;
+    border-radius: 8px;
+    padding: 16px; // Use Material's 8px increments
+    width: 90%;
+    max-width: 800px;
+    // Use Material card background for proper contrast
+    background-color: var(--mat-sys-background);
+    // Use percentage of viewport height instead of fixed height
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1100;
+
+    .close-button {
+      position: absolute;
+      top: 8px; // Use Material's 8px increments
+      right: 8px; // Use Material's 8px increments
+    }
+  }
+}
+
+.explorer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.explorer-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toggle-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-panel {
+  background: var(--mat-sys-surface-variant);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+
+  h3 {
+    margin: 0 0 16px 0;
+    font-weight: 500;
+  }
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  span {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .capsule-explorer-container {
+    padding: 16px;
+  }
+
+  .explorer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .legend-grid {
+    grid-template-columns: 1fr;
+  }
+}

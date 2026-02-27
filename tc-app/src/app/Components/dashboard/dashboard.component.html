@@ -1,0 +1,66 @@
+<div class="main-dashboard-container" *transloco="let t; read: 'dashboard'">
+  <header class="dashboard-header">
+    <h1>{{ t('title') || 'Dashboard' }}</h1>
+    <div class="dashboard-actions">
+      <button mat-button [matMenuTriggerFor]="settingsMenu" aria-label="Dashboard settings">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #settingsMenu="matMenu">
+        <button mat-menu-item (click)="toggleCompactMode()">
+          <mat-icon>{{ isCompactMode ? 'fullscreen' : 'fullscreen_exit' }}</mat-icon>
+          <span>{{ isCompactMode ? t('expand') : t('compact') }}</span>
+        </button>
+        <button mat-menu-item (click)="refreshDashboard()">
+          <mat-icon>refresh</mat-icon>
+          <span>{{ t('refresh') }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>
+
+  <!-- Dashboard Content -->
+  <div class="dashboard-content">
+    <!-- Secondary Components -->
+    <div class="dashboard-grid" [class.compact]="isCompactMode">
+      <!-- Quick Access -->
+      <section class="dashboard-quick-access">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>Quick Actions</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <tc-quick-access></tc-quick-access>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <!-- Activity Summary -->
+      <section class="dashboard-activity">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>Recent Activity</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <tc-activity-summary></tc-activity-summary>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <!-- Notifications -->
+      <section class="dashboard-notifications">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>Notifications</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <tc-notification-area></tc-notification-area>
+          </mat-card-content>
+        </mat-card>
+      </section>
+    </div>
+    <!-- Global Timeline (Primary Feature) -->
+    <section class="dashboard-timeline">
+      <tc-timeline-chart-direct *ngIf="chartTimeline" [chartData]="chartData"></tc-timeline-chart-direct>
+    </section>
+  </div>
+</div>

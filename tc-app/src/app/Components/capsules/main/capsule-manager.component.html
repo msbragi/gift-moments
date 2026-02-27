@@ -1,0 +1,63 @@
+<div *transloco="let t" class="capsule-main-container mat-app-background">
+  <!-- Legend modal overlay using Angular Material's Dialog styling concepts -->
+  <div class="legend-overlay" *ngIf="showLegend" (click)="closeOnBackdropClick($event)">
+    <mat-card class="legend-modal">
+      <mat-card-header>
+        <button mat-icon-button class="close-button" (click)="toggleLegend()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <tc-capsule-legend></tc-capsule-legend>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-toolbar class="list-header">
+    <h2>{{ t('capsule.title') }}</h2>
+
+    <div class="storage-metric">
+      <mat-chip highlighted
+        [matTooltip]="t('subscription.totalPurchasedDesc')">
+        <mat-icon matChipAvatar>shopping_cart</mat-icon>
+        {{ t('subscription.totalPurchased') }} {{ purchasedStorage() }}
+      </mat-chip>
+    </div>
+
+    <div class="storage-metric">
+      <mat-chip highlighted
+        [matTooltip]="t('subscription.totalRemainingDesc')">
+        <mat-icon matChipAvatar>cloud_queue</mat-icon>
+        {{ t('subscription.totalRemaining') }} {{ remainingStorage() }}
+      </mat-chip>
+    </div>
+
+    <div class="header-actions" *ngIf="!isEditMode">
+      <tc-panel-view-toggle [options]="viewToggleConfig" [value]="viewToggleMode"
+        (valueChange)="onViewModeChange($event)">
+      </tc-panel-view-toggle>
+    </div>
+  </mat-toolbar>
+
+  <div class="content-container">
+    @if(!isEditMode && capsules) {
+    <tc-capsule-card-view
+      *ngIf="(viewToggleMode === 'grid' || (viewToggleMode === 'help' && saveToggleMode === 'grid'))"
+      [capsules]="capsules" [currentCapsule]="selectedCapsule" [showActions]="showActions"
+      (action)="handleAction($event)">
+    </tc-capsule-card-view>
+
+    <!-- Table View -->
+    <tc-capsule-table-view
+      *ngIf="(viewToggleMode === 'list' || (viewToggleMode === 'help' && saveToggleMode === 'list'))"
+      [capsules]="capsules" [currentCapsule]="selectedCapsule" [showActions]="showActions"
+      (action)="handleAction($event)">
+    </tc-capsule-table-view>
+    }
+    @if(isEditMode && selectedCapsule) {
+    <tc-capsule-form [capsule]="selectedCapsule" (formSubmitted)="handleFormSubmitted($event)"
+      (formCancelled)="handleFormCancelled()">
+    </tc-capsule-form>
+    }
+  </div>
+</div>

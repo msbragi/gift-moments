@@ -1,0 +1,44 @@
+{
+  "en": {
+    "verification": "Welcome to Gift Moments! Verify your email",
+    "passwordReset": "Gift Moments Password Reset",
+    "passwordChanged": "Your Gift Moments Password Has Been Changed",
+    "notifyReminder": "Gift Moments: Reminder Notification",
+    "notifyAssign": "Gift Moments: A gift capsule is ready for you!"
+  },
+  "it": {
+    "verification": "Benvenuto in Gift Moments! Verifica la tua email",
+    "passwordReset": "Gift Moments Reset della Password",
+    "passwordChanged": "La tua password Gift Moments è stata cambiata",
+    "notifyReminder": "Notifica di promemoria Gift Moments",
+    "notifyAssign": "Gift Moments: Una capsula di regali è pronta per te!"
+  },
+  "es": {
+    "verification": "Bienvenido a Gift Moments! Verifica tu correo electrónico",
+    "passwordReset": "Restablecimiento de contraseña de Gift Moments",
+    "passwordChanged": "Su contraseña de Gift Moments ha sido cambiada",
+    "notifyReminder": "Notificación de recordatorio de Gift Moments",
+    "notifyAssign": "Gift Moments: ¡Una cápsula está lista para ti!"
+  },
+  "fr": {
+    "verification": "Bienvenue sur Gift Moments ! Vérifiez votre e-mail",
+    "passwordReset": "Réinitialisation du mot de passe Gift Moments",
+    "passwordChanged": "Votre mot de passe Gift Moments a été modifié",
+    "notifyReminder": "Notification de rappel Gift Moments",
+    "notifyAssign": "Gift Moments : Une capsule est prête pour vous !"
+  },
+  "ru": {
+    "verification": "Добро пожаловать в Gift Moments! Подтвердите свою электронную почту",
+    "passwordReset": "Сброс пароля Gift Moments",
+    "passwordChanged": "Ваш пароль Gift Moments был изменен",
+    "notifyReminder": "Уведомление о напоминании Gift Moments",
+    "notifyAssign": "Gift Moments: Ваша капсула времени готова!"
+  },
+  "ge": {
+    "verification": "კეთილი იყოს თქვენი მობრძანება Gift Moments-ში! დაადასტურეთ თქვენი ელფოსტა",
+    "passwordReset": "Gift Moments პაროლის აღდგენა",
+    "passwordChanged": "თქვენი Gift Moments პაროლი შეიცვალა",
+    "notifyReminder": "Gift Moments-ის გამაფრთხილებელი შეტყობინება",
+    "notifyAssign": "Gift Moments: თქვენი დროის კაფსულა მზად არის!"
+  }
+}

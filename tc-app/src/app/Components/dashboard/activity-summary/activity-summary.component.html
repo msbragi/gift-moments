@@ -1,0 +1,31 @@
+<div class="activity-container" *transloco="let t; read: 'dashboard'">
+  <div class="activities-content">
+    <ng-container *ngIf="activities$ | async as activities; else noActivity">
+      <ng-container *ngIf="activities && activities.length > 0; else noActivity">
+        <mat-nav-list>
+          <mat-list-item 
+            *ngFor="let activity of activities; trackBy: trackByActivityId"
+            class="activity-item">
+            <mat-icon matListItemIcon [color]="getActivityColor(activity.type)">
+              {{ getActivityIcon(activity.type) }}
+            </mat-icon>
+            
+            <div matListItemTitle>{{ activity.title }}</div>
+            <div matListItemLine>{{ activity.description }}</div>
+            
+            <span matListItemMeta class="activity-time">
+              {{ formatRelativeTime(activity.timestamp) }}
+            </span>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-container>
+    </ng-container>
+    
+    <ng-template #noActivity>
+      <div class="no-activity">
+        <mat-icon>notifications_none</mat-icon>
+        <p>{{ t('activity.noRecentActivity') || 'No recent activity' }}</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

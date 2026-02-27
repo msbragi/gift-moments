@@ -1,0 +1,19 @@
+<div *transloco="let t" class="item-grid">
+  <mat-card *ngFor="let item of items" class="item-card" appearance="outlined">
+    <mat-card-header class="icon-header">
+      <mat-icon mat-card-avatar>{{ getIcon(item) }}</mat-icon>
+      <div class="header-actions">
+        <tc-action-buttons 
+          [buttons]="getItemActions()"
+          (action)="onItemAction($event, item)">
+        </tc-action-buttons>
+      </div>
+    </mat-card-header>
+
+    <!-- Content with title and date -->
+    <mat-card-content>
+      <p class="item-title">{{ item.name || t('unnamed_item') }}</p>
+      <p style="text-align: right;" class="item-date">{{ item.created | dateformat }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

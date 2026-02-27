@@ -1,0 +1,58 @@
+/**
+ * Capsule legend component styling
+ * Follows Material Design guidelines for overlays and typography
+ */
+.capsule-legend-container {
+    padding: 16px;
+
+    // Use Material Design system variables for colors
+    .section-header {
+        margin: 16px 0 8px;
+        padding-bottom: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .legend-section {
+        margin-bottom: 24px;
+
+        .section-title {
+            margin: 0 0 16px 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                min-width: 160px;
+                padding: 8px 0;
+
+                // Use Material's standard icon sizing
+                mat-icon {
+                    font-size: 20px;
+                    height: 20px;
+                    width: 20px;
+                }
+
+                .legend-label {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    // Position close button according to Material Dialog patterns
+    .close-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+}

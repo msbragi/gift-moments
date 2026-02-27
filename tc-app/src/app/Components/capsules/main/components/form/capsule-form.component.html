@@ -1,0 +1,125 @@
+<div *transloco="let t;" class="capsule-form-container mat-app-background">
+  <form [formGroup]="capsuleForm" (ngSubmit)="onSubmit()">
+    <!-- Left column - Basic Info -->
+    <div class="form-column">
+      <mat-card>
+        <mat-card-content>
+          <h3>{{ t('capsule.basic_info') }}</h3>
+          
+          <!-- Name field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ t('capsule.name') }}</mat-label>
+            <input matInput formControlName="name" placeholder="{{ t('capsule.name_placeholder') }}">
+            <mat-icon matPrefix>label</mat-icon>
+            @if (capsuleForm.get('name')?.hasError('required')) {
+              <mat-error>{{ t('common.validation.required') }}</mat-error>
+            }
+            @if (capsuleForm.get('name')?.hasError('maxlength')) {
+              <mat-error>{{ t('common.validation.max_length', { length: 100 }) }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Description field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ t('capsule.description') }}</mat-label>
+            <textarea matInput formControlName="description" rows="4" 
+              placeholder="{{ t('capsule.description_placeholder') }}">
+            </textarea>
+            <mat-icon matPrefix>description</mat-icon>
+            @if (capsuleForm.get('description')?.hasError('required')) {
+              <mat-error>{{ t('common.validation.required') }}</mat-error>
+            }
+            @if (capsuleForm.get('description')?.hasError('maxlength')) {
+              <mat-error>{{ t('common.validation.max_length', { length: 500 }) }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Open date field -->
+          <mat-form-field appearance="outline">
+            <mat-label>{{ t('capsule.open_date') }}</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="openDate" [min]="minDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-icon matPrefix>event</mat-icon>
+            @if (capsuleForm.get('openDate')?.hasError('required')) {
+              <mat-error>{{ t('common.validation.required') }}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Visibility toggle -->
+          <div class="option-toggle">
+            <mat-slide-toggle formControlName="isPublic" color="primary">
+              {{ t('capsule.is_public') }}
+            </mat-slide-toggle>
+            <small class="option-description">{{ t('capsule.is_public_description') }}</small>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Right column - Location -->
+    <div class="form-column">
+      <mat-card>
+        <mat-card-content>
+          <!-- Physical/digital toggle -->
+          <div class="option-toggle">
+            <mat-slide-toggle formControlName="isPhysical" color="primary">
+              {{ t('capsule.is_physical') }}
+            </mat-slide-toggle>
+            <small class="option-description">{{ t('capsule.is_physical_description') }}</small>
+          </div>
+          
+          @if (capsuleForm.get('isPhysical')?.value) {
+            <h3>{{ t('capsule.location') }}</h3>
+            
+            <div class="location-fields">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ t('capsule.latitude') }}</mat-label>
+                <input matInput formControlName="lat" placeholder="40.730610">
+                <mat-icon matPrefix>place</mat-icon>
+                @if (capsuleForm.get('lat')?.hasError('required')) {
+                  <mat-error>{{ t('common.validation.required') }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>{{ t('capsule.longitude') }}</mat-label>
+                <input matInput formControlName="lng" placeholder="-73.935242">
+                <mat-icon matPrefix>place</mat-icon>
+                @if (capsuleForm.get('lng')?.hasError('required')) {
+                  <mat-error>{{ t('common.validation.required') }}</mat-error>
+                }
+              </mat-form-field>
+              
+              <button mat-button type="button" color="primary" (click)="getCurrentLocation()">
+                <mat-icon>my_location</mat-icon>
+                {{ t('map.useMyLocation') }}
+              </button>
+            </div>
+            
+            <!-- Map component -->
+            <div class="map-container">
+              <tc-map-location-picker
+                [initialLocation]="initialLocation"
+                (locationChange)="onLocationChange($event)">
+              </tc-map-location-picker>
+              <small>{{ t('map.select_location') }}</small>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Form actions -->
+    <mat-divider></mat-divider>
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="isSubmitting">
+        {{ t('common.actions.cancel') }}
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || capsuleForm.invalid">
+        <mat-icon>{{ editMode ? 'save' : 'add' }}</mat-icon>
+        {{ editMode ? t('common.actions.update') : t('common.actions.create') }}
+      </button>
+    </div>
+  </form>
+</div>

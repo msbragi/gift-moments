@@ -1,0 +1,70 @@
+<div *transloco="let t" class="map-container">
+  <!-- Show header when we have location OR when it's time-locked -->
+  <div class="map-header" *ngIf="hasValidLocation() || isTimeLocked()">
+    <div class="header-content">
+      <!-- Left side: Location info (only if not time-locked) -->
+      <div class="location-info" *ngIf="hasValidLocation()">
+        <div class="address-info" *ngIf="!isLoadingAddress && addressInfo?.success">
+          <mat-icon>location_city</mat-icon>
+          <span class="address-text">{{ getAddressDisplay() }}</span>
+        </div>
+        <div class="coordinates">
+          <mat-icon>place</mat-icon>
+          <span class="location-coordinates">{{ getLocationDisplay() }}</span>
+        </div>
+        <div class="address-loading" *ngIf="isLoadingAddress">
+          <mat-icon>hourglass_empty</mat-icon>
+          <span>{{ t('explorer.view.loading_address') || 'Loading address...' }}</span>
+        </div>
+      </div>
+
+      <!-- Time-locked message -->
+      <div class="time-locked-info" *ngIf="isTimeLocked()">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ t('explorer.view.location_time_locked') || 'Location will be revealed on opening date' }}</span>
+      </div>
+
+      <!-- Right side: Share actions (only if location is available) -->
+      <div class="share-actions" *ngIf="hasValidLocation()">
+        <button mat-icon-button 
+                [matTooltip]="t('explorer.view.share_qr') || 'Show QR Code'"
+                (click)="showQRCode()"
+                [disabled]="!hasValidLocation()">
+          <mat-icon>qr_code</mat-icon>
+        </button>
+        
+        <button mat-icon-button 
+                [matTooltip]="t('explorer.view.share_copy') || 'Copy Location'"
+                (click)="copyLocationToClipboard()"
+                [disabled]="!hasValidLocation()">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+        
+        <button mat-icon-button 
+                [matTooltip]="t('explorer.view.share_native') || 'Share Location'"
+                (click)="shareLocation()"
+                [disabled]="!hasValidLocation()">
+          <mat-icon>share</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map with location (normal case) -->
+  <div class="map-wrapper" *ngIf="hasValidLocation() && !isTimeLocked()">
+    <tc-map-location-picker [initialLocation]="mapLocation"></tc-map-location-picker>
+  </div>
+
+  <!-- Time-locked map (physical capsule before opening date) -->
+  <div class="map-wrapper time-locked" *ngIf="isTimeLocked()">
+    <tc-map-location-picker [initialLocation]="defaultLocation"></tc-map-location-picker>
+    <div class="time-locked-overlay">
+      <div class="time-locked-message">
+        <mat-icon>lock_clock</mat-icon>
+        <h4>{{ t('explorer.view.treasure_hunt_title') || "Hey, it's not time to go yet!" }}</h4>
+        <p>{{ t('explorer.view.treasure_hunt_message') || "Return on" }} <strong>{{ getFormattedOpenDate() }}</strong></p>
+        <p class="hint">{{ t('explorer.view.treasure_hunt_hint') || "The adventure awaits..." }}</p>
+      </div>
+    </div>
+  </div>
+</div>

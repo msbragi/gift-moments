@@ -1,0 +1,56 @@
+<div *transloco="let t" class="card-grid">
+  <mat-card *ngIf="capsules.length === 0" class="empty-state" appearance="outlined">
+    <mat-icon class="empty-icon">
+      {{ displayMode === 'assigned' ? 'inbox' : 'public' }}
+    </mat-icon>
+    <h3>{{ t('explorer.empty.' + displayMode + '.title') || 'No capsules found' }}</h3>
+    <p>{{ t('explorer.empty.' + displayMode + '.subtitle') || 'Check back later for new capsules' }}</p>
+  </mat-card>
+  
+  <mat-card *ngFor="let capsule of capsules; trackBy: trackByCapsuleId" 
+            class="capsule-card"
+            appearance="outlined"
+            (click)="onCapsuleClick(capsule)">
+    
+    <mat-card-header>
+      <div class="status-icons">
+        <mat-icon *ngIf="!capsule.isPublic" title="Private Capsule">lock</mat-icon>
+        <mat-icon *ngIf="capsule.isPublic" title="Public Capsule">public</mat-icon>
+        <mat-icon *ngIf="capsule.isOpen" title="Opened">visibility</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && isDateInPast(capsule.openDate)" title="Ready to Open">lock_open</mat-icon>
+        <mat-icon *ngIf="!capsule.isOpen && !isDateInPast(capsule.openDate)" title="Scheduled">lock_clock</mat-icon>
+        <mat-icon *ngIf="!capsule.isPhysical" title="Digital Capsule">cloud</mat-icon>
+        <mat-icon *ngIf="capsule.isPhysical" title="Physical Capsule">place</mat-icon>
+      </div>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <mat-card-title>{{ capsule.name }}</mat-card-title>
+      <mat-card-subtitle>{{ capsule.description || t('capsule.no_description') }}</mat-card-subtitle>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <div class="metadata-info">
+        <span class="metadata-item" *ngIf="capsule.created">
+          <mat-icon>calendar_today</mat-icon>
+          {{ formatDate(capsule.created) }}
+        </span>
+        <span class="metadata-item" *ngIf="capsule.openDate">
+          <mat-icon>schedule</mat-icon>
+          {{ formatDate(capsule.openDate) }}
+        </span>
+      </div>
+      
+      <div class="metadata-info">
+        <span class="metadata-item">
+          <mat-icon>inventory</mat-icon>
+          {{ capsule.usage?.items_per_capsule }}
+        </span>
+        <span class="metadata-item">
+          <mat-icon>people</mat-icon>
+          {{ capsule.usage?.recipients_per_capsule || 0 }}
+        </span>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

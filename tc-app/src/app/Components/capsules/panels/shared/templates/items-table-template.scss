@@ -1,0 +1,18 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.items-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+    .items-table {
+        .date-column {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<div *transloco="let t; read: 'recipients'" class="recipients-container">
+    <div class="recipients-header">
+      <h3>{{ t('title') }}</h3>
+      <button mat-icon-button color="primary" title="{{ t('add') }}">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </div>
+    
+    <div class="recipients-content">
+      <div *ngIf="!recipients.length" class="empty-state">
+        <p>{{ t('empty') }}</p>
+      </div>
+      
+      <div *ngIf="recipients.length" class="recipients-list">
+        <!-- Recipients will be listed here -->
+        <mat-chip-set>
+          <mat-chip *ngFor="let recipient of recipients" [removable]="true">
+            {{ recipient.email }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+    </div>
+  </div>

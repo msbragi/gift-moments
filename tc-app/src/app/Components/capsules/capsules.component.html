@@ -1,0 +1,46 @@
+<div *transloco="let t; read: 'capsule'" class="capsules-container">
+    <div class="panels-layout">
+        <div class="main-panel">
+            <!-- Capsule list with internal header and legend handling -->
+            <tc-capsule-manager [capsules]="allCapsules" [showActions]="true" (selectCapsule)="onSelectCapsule($event)">
+            </tc-capsule-manager>
+        </div>
+
+        <!-- Side Panel with Accordions -->
+        <div class="side-panel">
+            <mat-toolbar class="list-header">
+                <h2>{{t('elements.title')}}</h2>
+            </mat-toolbar>
+            <mat-accordion multi="false" class="panels-container">
+                <mat-expansion-panel [expanded]="expandedPanel === 'library'">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ t('panels.library.title') }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <tc-capsule-library [currentCapsule]="selectedCapsule" />
+                </mat-expansion-panel>
+                <!-- Capsule Contents Panel -->
+                <mat-expansion-panel [expanded]="expandedPanel === 'items'" [disabled]="!selectedCapsule">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ t('panels.contents.title') }}
+                            &nbsp;{{ selectedCapsule?.name }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <tc-capsule-items [currentCapsule]="selectedCapsule" />
+                </mat-expansion-panel>
+                <!-- Recipients Panel -->
+                <mat-expansion-panel [expanded]="expandedPanel === 'recipients'" [disabled]="!selectedCapsule">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ t('panels.recipients.title') }}
+                            &nbsp;{{ selectedCapsule?.name }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <tc-capsule-recipients [currentCapsule]="selectedCapsule" />
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>

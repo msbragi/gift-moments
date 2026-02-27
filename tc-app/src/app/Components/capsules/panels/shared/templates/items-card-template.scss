@@ -1,0 +1,86 @@
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  padding: 8px;
+  height: 280px;
+  overflow-y: auto;
+}
+
+// Compact Material card
+.item-card {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  
+  // Icon header for non-images
+  .icon-header {
+    padding: 8px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px; // Ensure consistent height
+    color: #018786;
+    mat-icon[mat-card-avatar] {
+      font-size: 32px;
+      margin: 0 !important; // Remove Material's default margin
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center; // Center buttons vertically
+      
+      button {
+        padding: 0 !important; // Remove button padding
+        min-width: 32px !important; // Override Material's min-width
+        
+        mat-icon {
+          font-size: 24px;
+          line-height: 1; // Remove line-height issues
+        }
+      }
+    }
+  }
+  
+  // Compact content
+  mat-card-content {
+    padding: 8px;
+    flex: 1;
+    
+    .item-title {
+      font-weight: 500;
+      margin: 0 0 4px 0;
+      font-size: 0.875rem;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .item-date {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--mat-sys-outline);
+    }
+  }
+  
+  // Compact actions
+  mat-card-actions {
+    padding: 4px;
+    min-height: auto;
+    
+    button[mat-icon-button] {
+      --mdc-icon-button-state-layer-size: 32px;
+      --mdc-icon-button-icon-size: 18px;
+    }
+  }
+}
+
+// Mobile responsive - stack vertically for more space
+@media (max-width: 768px) {
+  .item-grid {
+    grid-template-columns: 1fr;
+    height: 200px;
+    gap: 6px;
+  }
+}

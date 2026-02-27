@@ -1,0 +1,41 @@
+<div *transloco="let t; read: 'login'" class="login-container">
+  <div class="login-card">
+    <h1 class="login-title">{{ t('Welcome') }}</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{t('emailLabel')}}</mat-label>
+        <input matInput formControlName="email" type="email" [placeholder]="t('emailInput')" />
+        <mat-error *ngIf="loginForm.get('email')?.invalid">{{ t('emailError') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ t('passwordLabel') }}</mat-label>
+        <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" [placeholder]="t('passwordPlaceholder')">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Toggle password visibility'" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          {{ t('passwordRequired') }}
+        </mat-error>
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="loginForm.invalid">
+        {{t('loginButton')}}
+      </button>
+    </form>
+
+    <div class="divider">OR</div>
+
+    <!-- Updated Google Button -->
+    <button mat-raised-button color="accent" class="full-width google-button" (click)="triggerGoogleLogin()">
+      <img src="assets/img/icons/google-logo.svg" alt="Google Logo" class="google-logo" />
+      {{ t('googleButton') }}
+    </button>
+    
+    <div class="actions">
+      <button mat-button color="accent" (click)="navigateToRegister()">{{ t('registerButton') }}</button>
+      <button mat-button color="warn" (click)="navigateToForgotPassword()">{{ t('forgotPwdButton') }}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div *transloco="let t" class="static-content-container">
+    <ng-container *ngIf="state$ | async as state">
+        <!-- In pagine fallback inglese -->
+        <div *ngIf="translationHint" class="translation-hint">
+            <small>🌍 {{t('atranslation-hint')}}</small>
+        </div>
+        <ng-container *ngIf="!state.isLoading">
+            <div class="static-page {{state.pageId}}" (click)="contentClick($event)" [innerHTML]="state.content"></div>
+        </ng-container>
+    </ng-container>
+
+    <ng-template #errorStateObservable>
+        <p>Something went wrong initializing the content display.</p>
+    </ng-template>
+</div>

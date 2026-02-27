@@ -1,0 +1,79 @@
+.capsule-table-container {
+  padding: 16px;
+
+  .capsule-table {
+    width: 100%;
+
+    .mat-mdc-row {
+      cursor: pointer;
+
+      &.selected-row {
+        // Use a neutral selected row background
+        background-color: rgba(0, 0, 0, 0.04);
+        border-left: 4px solid #3f51b5;
+      }
+    }
+
+    .name-cell {
+      max-width: 300px;
+
+      .capsule-name-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .capsule-name {
+          font-weight: 500;
+        }
+
+        .capsule-description {
+          font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .date-cell {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+
+      .small-icon {
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    .count-cell {
+      .count-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 6px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 500;
+        color: white;
+        background-color: #3f51b5;
+      }
+    }
+
+    .actions-cell {
+      width: 140px;
+      white-space: nowrap;
+    }
+  }
+
+  .empty-state {
+    padding: 32px;
+    text-align: center;
+    font-style: italic;
+    border-radius: 8px;
+  }
+}
