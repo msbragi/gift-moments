@@ -3,7 +3,7 @@
 Cleanup.md
 
 # Docker directory and all its contents
-Docker/
+Docker/**
 !Docker/docker-compose.yml
 !Docker/.env.example
 !Docker/tc-be/
@@ -12,6 +12,9 @@ Docker/
 !Docker/tc-fe/Dockerfile
 !Docker/tc-db/
 !Docker/tc-db/mysql/
+!Docker/tc-db/mysql/Dockerfile
+!Docker/tc-db/mysql/scripts/
+!Docker/tc-db/mysql/scripts/**
 
 # Docker directory and all its contents
 docs/

@@ -1,0 +1,127 @@
+services:
+  # Frontend Service
+  frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=(Host(`${DOMAIN}`) || Host(`${DOMAIN_WWW}`)) && !PathPrefix(`/api`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    build:
+      context: ./tc-fe
+      dockerfile: Dockerfile
+    image: timecaps-frontend
+    container_name: timecaps-frontend
+    #ports:
+      #- "80:80"
+      #- "443:443"
+    volumes:
+      - ./config/frontend/assets/:/usr/share/nginx/html/assets/:ro
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./data/logs/nginx/:/var/log/nginx/
+    depends_on:
+      - backend
+    networks:
+      - timecaps-network
+    restart: unless-stopped
+  # Backend Service
+  backend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=(Host(`${DOMAIN}`) || Host(`${DOMAIN_WWW}`)) && PathPrefix(`/api`)"      
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.backend.loadbalancer.server.port=3000"    
+    build:
+      context: ./tc-be
+      dockerfile: Dockerfile
+    image: timecaps-backend
+    container_name: timecaps-backend
+    #ports:
+    #  - "3000:3000"
+    volumes:
+      - ./config/backend/.env:/opt/tc-be/app/.env:ro
+      - ./data/uploads/:/opt/tc-be/app/uploads/
+      - ./data/sqlite/:/opt/tc-be/app/data/user_capsules/
+      - ./logs/backend/:/opt/tc-be/app/logs/
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - timecaps-network
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  # Database Service (MySQL - default)
+  database:
+    build:
+      context: ./tc-db/mysql
+      dockerfile: Dockerfile
+    image: timecaps-database
+    container_name: timecaps-database
+    ports:
+      # Secure localhost binding
+      - "127.0.0.1:${MYSQL_PORT:-3306}:3306"
+      #- "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - ./data/mysql/:/var/lib/mysql/
+      - ./data/logs/mysql/:/var/log/mysql/
+      # Mount config file for fine tuning (optional)
+      - ./tc-db/mysql/config/mysql.cnf:/etc/mysql/conf.d/custom.cnf:ro
+      # Mount init scripts for changes without rebuild (only dev and staging)
+      # N.B. comment copy line in Dockerfile if you use this
+      # - ./scripts/init/:/docker-entrypoint-initdb.d/:ro
+    networks:
+      - timecaps-network
+    restart: unless-stopped
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test: ["CMD", "${DB_HEALTH_CHECK}", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  traefik:
+    image: traefik:v2.11
+    container_name: timecaps-traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--log.level=INFO"
+    ports:
+      - "80:80"
+      - "443:443"
+        # - "8080:8080" # Traefik dashboard (optional, remove in prod)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/traefik/letsencrypt:/letsencrypt
+      - ./data/traefik/logs:/logs
+      #- ./config/traefik/traefik.yml:/etc/traefik/traefik.yml:ro # (optional, if you want static config)
+    networks:
+      - timecaps-network
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+networks:
+  timecaps-network:
+    driver: bridge
+    name: timecaps-network
