@@ -21,7 +21,7 @@ Life’s best gifts are about timing and meaning. Gift Moments helps you:
 - **Make every celebration more personal and memorable**
 - **Create a legacy of love, wisdom, and joy for friends and family**
 
-
+For more info visit my web site [NoSpace.net](https://www.nospace.net/en/blog-separator/gift-moments)
 ---
 
 
